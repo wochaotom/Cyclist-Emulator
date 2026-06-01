@@ -33,8 +33,8 @@ Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem m
 ## Quickstart
 
 ```bash
-git clone https://github.com/wochaotom/M142-Cyclist-Model.git
-cd M142-Cyclist-Model
+git clone https://github.com/wochaotom/Cyclist-Emulator.git
+cd Cyclist-Emulator
 
 # (recommended) isolated Python environment
 python -m venv .venv
