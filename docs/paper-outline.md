@@ -2,7 +2,7 @@
 
 > **The paper itself lives in Overleaf:** <!-- paste the Overleaf link here -->
 >
-> This file is only a structural checklist mirroring the M142 rubric. **Write all content yourselves** — do not have an AI fill in these sections. Each bracketed note just states what belongs there.
+> This file is only a structural checklist mirroring the M142 rubric. Each bracketed note states what belongs in that section.
 
 The rubric expects the following sections. (Write the summary sheet **last**.)
 
@@ -32,6 +32,5 @@ _[A concise, standalone overview that convinces a reader the paper is worth read
 ## 6. Conclusion
 - _[Summary of findings, plus future directions or other applications of the approach.]_
 
-## 7. References & AI-use disclosure
+## 7. References
 - _[All sources used. Does not count toward the page limit.]_
-- _[AI-use disclosure — pull from `AI-USE-LOG.md`: tool, purpose, and how the output was incorporated/modified.]_

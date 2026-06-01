@@ -6,7 +6,6 @@ A short guide so we collaborate cleanly and leave a clear trail of who did what 
 
 1. **Commit from your own GitHub account.** Commits are attributed to their author; that attribution is the evidence the work was genuinely shared across the group.
 2. **Commit early and often.** Small, frequent commits with clear messages tell the story of how the model evolved. A perfect model with no history gets scrutinized.
-3. **Never commit AI-generated math, analysis, or paper prose.** See the AI policy in the [README](README.md). Log any *allowed* AI help in [`docs/AI-USE-LOG.md`](docs/AI-USE-LOG.md).
 
 ## Workflow (pull requests)
 

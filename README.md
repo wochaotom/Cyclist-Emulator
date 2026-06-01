@@ -13,7 +13,6 @@ Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem m
 | [`references/`](references/) | Source materials (papers, constants). |
 | [`docs/assignment/`](docs/assignment/) | The official assignment instructions. |
 | [`docs/paper-outline.md`](docs/paper-outline.md) | Rubric-aligned section skeleton for the write-up. |
-| [`docs/AI-USE-LOG.md`](docs/AI-USE-LOG.md) | Running disclosure log of any AI assistance (required by the assignment). |
 | [`docs/proof-of-work/`](docs/proof-of-work/) | Photos/scans of handwritten derivations, scratch work, meeting notes — bring these to consultations. |
 | [`data/`](data/) | Any empirical or course data we add (elevation profiles, real power data, etc.). |
 
@@ -43,7 +42,3 @@ pip install numpy matplotlib jupyter
 
 jupyter notebook notebooks/model_v2_simple_power.ipynb
 ```
-
-## AI-use policy (read before using any AI tool)
-
-This assignment **caps the grade at 60% (plus possible academic-integrity review)** if AI is used to formulate the model, choose assumptions/variables/parameters, perform or interpret the analysis, or write paper content. AI is allowed only for grammar/formatting, plotting-code syntax you understand and verify, and background summaries you independently check. **All AI use must be logged in [`docs/AI-USE-LOG.md`](docs/AI-USE-LOG.md) and disclosed in the paper.** In Consultation 2, any member can be asked to defend any derivation.
