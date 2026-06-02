@@ -1,42 +1,45 @@
-"""Run one rider over one course at constant power and report segment times."""
+"""Run one rider over one course and compare constant-power vs paced riding."""
 
 import os
 
 from course import load_course
-from physics import speed_from_power
-from parameters import DEFAULT_PHYSICS, RIDER_PROFILES, WIND_EXPOSURE
+from pacing import simulate_pacing, constant_cp, spend_on_climbs
+from parameters import DEFAULT_PHYSICS, RIDER_PROFILES
 
 
-def simulate(course_path, rider_name, phys=DEFAULT_PHYSICS):
-    """Return per-segment (segment, speed, time) rows and the total race time."""
+def run(course_path, rider_name, phys=DEFAULT_PHYSICS):
     course = load_course(course_path)
     rider = RIDER_PROFILES[rider_name]
     mass = rider["rider_mass"] + phys["bike_mass"]
-    power = rider["sustainable_power"]
+    cp, w_prime = rider["cp"], rider["w_prime"]
 
-    rows = []
-    total_time = 0.0
-    for seg in course:
-        wind = WIND_EXPOSURE[seg.wind_exposure]
-        speed = speed_from_power(power, seg.grade, wind, mass, phys)
-        seg_time = seg.distance_m / speed + seg.turn_penalty_s
-        total_time += seg_time
-        rows.append((seg, speed, seg_time))
-    return rows, total_time
+    flat_powers = constant_cp(course, cp)
+    paced_powers = spend_on_climbs(course, mass, phys, cp, w_prime)
+
+    flat = simulate_pacing(course, flat_powers, mass, phys, cp, w_prime)
+    paced = simulate_pacing(course, paced_powers, mass, phys, cp, w_prime)
+    return cp, w_prime, flat, paced
 
 
-def print_report(rows, total_time, rider_name):
-    print(f"Rider: {rider_name}")
-    print(f"{'id':>2}  {'segment':<18}{'dist(m)':>8}{'grade':>7}"
-          f"{'speed(m/s)':>11}{'km/h':>7}{'time(s)':>9}")
-    for seg, speed, seg_time in rows:
-        print(f"{seg.segment_id:>2}  {seg.name:<18}{seg.distance_m:>8.0f}"
-              f"{seg.grade * 100:>6.1f}%{speed:>11.2f}{speed * 3.6:>7.1f}{seg_time:>9.1f}")
-    print(f"\nTotal time: {total_time:.1f} s  ({total_time / 60:.2f} min)")
+def print_report(rider_name, cp, w_prime, flat, paced):
+    flat_rows, flat_time, _ = flat
+    paced_rows, paced_time, _ = paced
+
+    print(f"Rider: {rider_name}    CP = {cp} W    W' = {w_prime / 1000:.0f} kJ\n")
+    print("Paced ride (spend the reserve on the climbs):")
+    print(f"{'id':>2}  {'segment':<18}{'power':>7}{'speed':>8}{'km/h':>7}"
+          f"{'time':>8}{'reserve(kJ)':>13}")
+    for seg, power, speed, seg_time, reserve in paced_rows:
+        print(f"{seg.segment_id:>2}  {seg.name:<18}{power:>7.0f}{speed:>8.2f}"
+              f"{speed * 3.6:>7.1f}{seg_time:>8.1f}{reserve / 1000:>13.2f}")
+
+    print(f"\nConstant CP : {flat_time:8.1f} s  ({flat_time / 60:.2f} min)")
+    print(f"Paced       : {paced_time:8.1f} s  ({paced_time / 60:.2f} min)")
+    print(f"Time saved  : {flat_time - paced_time:8.1f} s  by spending the W' reserve")
 
 
 if __name__ == "__main__":
     here = os.path.dirname(__file__)
     course_path = os.path.join(here, "..", "data", "courses", "custom_5km_loop.csv")
-    rows, total_time = simulate(course_path, "male_tt")
-    print_report(rows, total_time, "male_tt")
+    cp, w_prime, flat, paced = run(course_path, "male_tt")
+    print_report("male_tt", cp, w_prime, flat, paced)

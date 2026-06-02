@@ -10,14 +10,17 @@ DEFAULT_PHYSICS = {
 }
 
 # The two rider types the problem asks for: a time-trial specialist and a
-# climber, each as a male and female profile. `sustainable_power` is a single
-# constant-power stand-in for now - it becomes a full power curve (max power vs
-# duration) plus an energy budget once we move past the baseline model.
+# climber, each as a male and female profile. Each rider is a critical-power
+# model: they hold CP (watts) for a long time and carry a finite reserve W'
+# (joules) for going above CP, which refills when they ride below it.
+#   cp       - critical power, watts
+#   w_prime  - anaerobic work capacity, joules
+# Placeholder values - refine from rider data during parameterization.
 RIDER_PROFILES = {
-    "male_tt":        {"rider_mass": 75, "sustainable_power": 320},
-    "female_tt":      {"rider_mass": 62, "sustainable_power": 240},
-    "male_climber":   {"rider_mass": 65, "sustainable_power": 290},
-    "female_climber": {"rider_mass": 55, "sustainable_power": 220},
+    "male_tt":        {"rider_mass": 75, "cp": 350, "w_prime": 22000},
+    "female_tt":      {"rider_mass": 62, "cp": 270, "w_prime": 16000},
+    "male_climber":   {"rider_mass": 65, "cp": 330, "w_prime": 18000},
+    "female_climber": {"rider_mass": 55, "cp": 250, "w_prime": 14000},
 }
 
 # Effective headwind (m/s) we assume for each wind-exposure label used in the
