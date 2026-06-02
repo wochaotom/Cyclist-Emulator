@@ -60,8 +60,8 @@ def spend_on_slow_segments(course, mass, phys, cp, w_prime, max_boost=300, step=
     to spend the reserve on. Not provably optimal, but it captures the principle
     (ride harder where you are slower) with a concrete, explainable plan.
     """
-    base_rows = simulate_pacing(course, constant_cp(course, cp), mass, phys, cp, w_prime)[0]
-    speeds = [row[2] for row in base_rows]      # baseline at-CP speed of each segment
+    base = simulate_pacing(course, constant_cp(course, cp), mass, phys, cp, w_prime)[0]
+    speeds = [speed for _seg, _power, speed, _time, _reserve in base]
     avg = sum(speeds) / len(speeds)
     slow = [s < avg for s in speeds]            # below-average speed = the hard segments
     if not any(slow):                           # perfectly uniform course: spend everywhere
