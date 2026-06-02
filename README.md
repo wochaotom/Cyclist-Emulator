@@ -46,6 +46,7 @@ Symbols: $\rho$ air density, $C_dA$ drag area, $C_{rr}$ rolling-resistance coeff
 | [`src/simulate.py`](src/simulate.py) | Runs constant-CP vs. paced riding and reports the time saved. |
 | [`src/sensitivity.py`](src/sensitivity.py) | Wind and power-deviation sensitivity analyses. |
 | [`src/compare.py`](src/compare.py) | Rider × course matchup — every rider across every course. |
+| [`src/plots.py`](src/plots.py) | Generates the paper's figures into `paper/figures/` (needs matplotlib). |
 
 Run it:
 
