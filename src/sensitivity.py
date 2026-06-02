@@ -9,13 +9,13 @@ much does the time move?"
 import os
 
 from course import load_course
-from pacing import simulate_pacing, spend_on_climbs
+from pacing import simulate_pacing, spend_on_slow_segments
 from parameters import DEFAULT_PHYSICS, RIDER_PROFILES
 
 
 def wind_sensitivity(course, mass, phys, cp, w_prime, offsets):
     """Finish time vs a uniform wind offset (m/s; + headwind, - tailwind)."""
-    plan = spend_on_climbs(course, mass, phys, cp, w_prime)
+    plan = spend_on_slow_segments(course, mass, phys, cp, w_prime)
     rows = []
     for off in offsets:
         _, total, feasible = simulate_pacing(course, plan, mass, phys, cp, w_prime, off)
@@ -25,7 +25,7 @@ def wind_sensitivity(course, mass, phys, cp, w_prime, offsets):
 
 def power_deviation_sensitivity(course, mass, phys, cp, w_prime, deviations):
     """Finish time when the rider holds (1 + dev) x the planned power everywhere."""
-    plan = spend_on_climbs(course, mass, phys, cp, w_prime)
+    plan = spend_on_slow_segments(course, mass, phys, cp, w_prime)
     rows = []
     for dev in deviations:
         powers = [p * (1 + dev) for p in plan]

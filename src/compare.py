@@ -13,13 +13,13 @@ type (the men's event is two laps).
 import os
 
 from course import load_course
-from pacing import simulate_pacing, spend_on_climbs
+from pacing import simulate_pacing, spend_on_slow_segments
 from parameters import DEFAULT_PHYSICS, RIDER_PROFILES
 
 
 def paced_time(course, rider, phys=DEFAULT_PHYSICS):
     mass = rider["rider_mass"] + phys["bike_mass"]
-    plan = spend_on_climbs(course, mass, phys, rider["cp"], rider["w_prime"])
+    plan = spend_on_slow_segments(course, mass, phys, rider["cp"], rider["w_prime"])
     _, total, _ = simulate_pacing(course, plan, mass, phys, rider["cp"], rider["w_prime"])
     return total
 

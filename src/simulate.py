@@ -3,7 +3,7 @@
 import os
 
 from course import load_course
-from pacing import simulate_pacing, constant_cp, spend_on_climbs
+from pacing import simulate_pacing, constant_cp, spend_on_slow_segments
 from parameters import DEFAULT_PHYSICS, RIDER_PROFILES
 
 
@@ -14,7 +14,7 @@ def run(course_path, rider_name, phys=DEFAULT_PHYSICS):
     cp, w_prime = rider["cp"], rider["w_prime"]
 
     flat_powers = constant_cp(course, cp)
-    paced_powers = spend_on_climbs(course, mass, phys, cp, w_prime)
+    paced_powers = spend_on_slow_segments(course, mass, phys, cp, w_prime)
 
     flat = simulate_pacing(course, flat_powers, mass, phys, cp, w_prime)
     paced = simulate_pacing(course, paced_powers, mass, phys, cp, w_prime)
@@ -26,7 +26,7 @@ def print_report(rider_name, cp, w_prime, flat, paced):
     paced_rows, paced_time, _ = paced
 
     print(f"Rider: {rider_name}    CP = {cp} W    W' = {w_prime / 1000:.0f} kJ\n")
-    print("Paced ride (spend the reserve on the climbs):")
+    print("Paced ride (spend the reserve on the slow sections):")
     print(f"{'id':>2}  {'segment':<18}{'power':>7}{'speed':>8}{'km/h':>7}"
           f"{'time':>8}{'reserve(kJ)':>13}")
     for seg, power, speed, seg_time, reserve in paced_rows:

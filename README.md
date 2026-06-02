@@ -35,7 +35,7 @@ $$T_i = \frac{d_i}{v_i} + \tau_i \qquad\qquad T_\text{total} = \sum_i T_i$$
 
 Symbols: $\rho$ air density, $C_dA$ drag area, $C_{rr}$ rolling-resistance coefficient, $m$ rider + bike mass, $g$ gravity, $w_i$ segment headwind, $\text{grade}_i$ slope as a fraction, $d_i$ segment distance, $\tau_i$ turn penalty.
 
-**Rider model and pacing.** Each rider is a *critical-power* model: a sustainable power $\text{CP}$ plus a finite anaerobic reserve $W'$ (joules). Riding above CP drains the reserve at rate $P-\text{CP}$; riding below refills it; it can never go negative — that single rule is the rider's energy/fatigue limit. The model compares two strategies: holding CP the whole way (never spending the reserve) versus spending $W'$ on the climbs, where it buys the most time. The gap between them is the value of pacing.
+**Rider model and pacing.** Each rider is a *critical-power* model: a sustainable power $\text{CP}$ plus a finite anaerobic reserve $W'$ (joules). Riding above CP drains the reserve at rate $P-\text{CP}$; riding below refills it; it can never go negative — that single rule is the rider's energy/fatigue limit. The model compares two strategies: holding CP the whole way (never spending the reserve) versus spending $W'$ on the slowest sections (climbs and headwinds), where it buys the most time. The gap between them is the value of pacing.
 
 | File | Role |
 |------|------|
@@ -78,9 +78,9 @@ Tokyo's climb gradients are quoted from race previews; its segment lengths and d
 
 > Current model output — reproduce with the scripts in `src/`. Tokyo's gradients and the rider/wind parameters are estimates within sourced ranges, so treat the **magnitudes** as provisional; the **patterns** are the findings.
 
-**Pacing beats flat power.** Custom loop, male TT specialist: riding constant critical power = **440.9 s**; spending the $W'$ reserve on the climbs = **400.7 s** → **~40 s (9%) saved**. (`simulate.py`)
+**Pacing beats flat power.** Custom loop, male TT specialist: riding constant critical power = **440.9 s**; spending the $W'$ reserve on the slow sections = **405.8 s** → **~35 s (8%) saved**. (`simulate.py`)
 
-**Wind dominates — and a plan can break.** One plan held into different winds (`sensitivity.py`): a **±4 m/s** shift moves the finish **−61 s to +80 s** (−15% to +20%). Into a headwind the planned reserve-spend goes infeasible — the climbs take longer and drain $W'$ to empty.
+**Wind dominates — and a plan can break.** One plan held into different winds (`sensitivity.py`): a **±4 m/s** shift moves the finish **−58 s to +78 s** (−14% to +19%). Into a headwind the planned reserve-spend goes infeasible — the climbs take longer and drain $W'$ to empty.
 
 **Execution error is asymmetric.** The optimal plan already empties $W'$, so the rider can underperform (−5% power → +9 s) but cannot *sustainably* overperform (going harder runs the reserve negative). A realistic ±5% miss ≈ ±2% on the finish.
 
@@ -88,8 +88,8 @@ Tokyo's climb gradients are quoted from race previews; its segment lengths and d
 
 | | custom | Tokyo (hilly) | Flanders (flat) |
 |--|---:|---:|---:|
-| **male** | +8.5 s | **−21.6 s** | +57.9 s |
-| female | +14.1 s | +6.8 s | +154.5 s |
+| **male** | +8.5 s | **−21.6 s** | +56.8 s |
+| female | +14.9 s | +6.8 s | +174.0 s |
 
 The **male climber wins hilly Tokyo** but loses the flatter courses — the terrain-dependent advantage the problem is built around, matching the real races (climbers/all-rounders won Tokyo, TT engines won Flanders). The **female gap narrows on Tokyo (+6.8 s) but does not invert** even with realism-corrected parameters (a heavier, more powerful female TT specialist; a lighter climber). We do **not** force it: the real female Tokyo winner (van Vleuten) was an exceptional all-rounder, not a representative light climber, so a clean *type-level* female cross-over isn't expected — a model-assessment finding, not a fault. (`compare.py`)
 
