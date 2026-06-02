@@ -26,7 +26,7 @@ Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem m
 
 | Name | GitHub | Focus |
 |------|--------|-------|
-| Carter Dandridge | @wochaotom | |
+| Carter Dandridge | @wochaotom | Course Parameters |
 | _add teammate_ | @_username_ | |
 
 ## Quickstart
