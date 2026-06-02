@@ -19,6 +19,7 @@ Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem m
 | [`docs/proof-of-work/`](docs/proof-of-work/) | Photos/scans of handwritten derivations, scratch work, meeting notes — bring these to consultations. |
 | [`data/courses/`](data/courses/) | Course files (CSV of segments) the model reads. |
 | [`data/`](data/) | Any other empirical data we add. |
+| [`paper/`](paper/) | LaTeX scaffold for the write-up (paste into / sync with Overleaf). |
 
 ## The model
 
