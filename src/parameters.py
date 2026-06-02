@@ -21,9 +21,9 @@ DEFAULT_PHYSICS = {
 # climber carries the higher W/kg, the TT specialist the higher absolute watts.
 RIDER_PROFILES = {
     "male_tt":        {"rider_mass": 75, "cp": 350, "w_prime": 22000},  # 4.7 W/kg
-    "female_tt":      {"rider_mass": 62, "cp": 270, "w_prime": 16000},  # 4.4 W/kg
+    "female_tt":      {"rider_mass": 70, "cp": 285, "w_prime": 16000},  # 4.1 W/kg (heavier, more powerful TT engine)
     "male_climber":   {"rider_mass": 65, "cp": 330, "w_prime": 18000},  # 5.1 W/kg
-    "female_climber": {"rider_mass": 55, "cp": 250, "w_prime": 14000},  # 4.5 W/kg
+    "female_climber": {"rider_mass": 56, "cp": 250, "w_prime": 14000},  # 4.5 W/kg (lighter climber)
 }
 
 # Effective headwind (m/s) we assume for each wind-exposure label used in the

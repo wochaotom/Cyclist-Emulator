@@ -89,9 +89,9 @@ Tokyo's climb gradients are quoted from race previews; its segment lengths and d
 | | custom | Tokyo (hilly) | Flanders (flat) |
 |--|---:|---:|---:|
 | **male** | +8.5 s | **−21.6 s** | +57.9 s |
-| female | +11.5 s | +14.9 s | +93.8 s |
+| female | +14.1 s | +6.8 s | +154.5 s |
 
-The **male climber wins hilly Tokyo** but loses the flatter courses — the terrain-dependent advantage the problem is built around, matching the real races (climbers/all-rounders won Tokyo, TT engines won Flanders). The **female cross-over is absent at the current parameters** (the female climber's W/kg edge is too small) — a calibration finding, not a model fault. (`compare.py`)
+The **male climber wins hilly Tokyo** but loses the flatter courses — the terrain-dependent advantage the problem is built around, matching the real races (climbers/all-rounders won Tokyo, TT engines won Flanders). The **female gap narrows on Tokyo (+6.8 s) but does not invert** even with realism-corrected parameters (a heavier, more powerful female TT specialist; a lighter climber). We do **not** force it: the real female Tokyo winner (van Vleuten) was an exceptional all-rounder, not a representative light climber, so a clean *type-level* female cross-over isn't expected — a model-assessment finding, not a fault. (`compare.py`)
 
 **Validation vs the 2021 winners.** With an elite-but-not-champion archetype (CP 350 W), the model runs **~12–27% slower** than the actual winners (Flanders: 3439 s model vs 2868 s for Ganna). The physics is the right shape; the gap is the archetype CP sitting well below a world-champion's (~490 W). Right model, calibratable inputs.
 
