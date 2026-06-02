@@ -4,7 +4,7 @@ Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem m
 
 > **Assignment:** see [`docs/assignment/`](docs/assignment/). Deliverables: a 10–20 page paper, a presentation (≤20 min), peer evaluations, and two professor/TA consultations.
 >
-> 🚀 **New to the team or to git? Start with [`START-HERE.md`](START-HERE.md)** — 10-minute setup, no command line needed.
+> **New to the team or to git? Start with [`START-HERE.md`](START-HERE.md)** — 10-minute setup, no command line needed.
 
 ## Repository layout
 
@@ -98,7 +98,7 @@ The **male climber wins hilly Tokyo** but loses the flatter courses — the terr
 ## Links
 
 - 📝 **Paper (Overleaf):** <!-- paste the Overleaf share link here -->
-- 📋 **Project sign-up sheet:** https://docs.google.com/spreadsheets/d/1zr8BNPS1wVuw7ZPD5pIbW7FvJqMs6sMdaK7anrhqdo/edit
+- 📋 **Project sign-up sheet:** 
 - 🤝 **How to contribute:** [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ## Team
