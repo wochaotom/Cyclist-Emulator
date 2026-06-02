@@ -66,13 +66,34 @@ A course is an ordered list of **segments**, stored as a CSV in [`data/courses/`
 
 The three courses the problem requires:
 
-| File | Course | Status |
-|------|--------|--------|
-| `custom_5km_loop.csv` | Self-designed loop — 4 turns, a climb + descent, returns to start. | Ready (worked example). |
-| `tokyo_olympic_tt.csv` | 2021 Olympic ITT, Tokyo. | Template — to parameterise. |
-| `flanders_world_tt.csv` | 2021 UCI Worlds ITT, Flanders. | Template — to parameterise. |
+| File | Course | Distance | Climbing | Sharp turns | Status |
+|------|--------|---------:|---------:|:-----------:|--------|
+| `custom_5km_loop.csv` | Self-designed **technical loop** | 5.0 km | one 6% ramp | 4 | Ready |
+| `tokyo_olympic_tt.csv` | Tokyo 2021 Olympic ITT (1 lap; men ride 2) | 22.1 km | ~423 m | speedway + 2 climbs | Gradients sourced, lengths inferred |
+| `flanders_world_tt.csv` | Flanders 2021 Worlds ITT (men) | 43.3 km | ~78 m (flat) | seafront / Damme / Bruges | Confirmed flat |
 
-To parameterise a real course: split the route into segments, then for each give its distance, average grade, a turn penalty wherever the rider must brake, and a wind-exposure label. The wind labels map to headwind speeds in [`src/parameters.py`](src/parameters.py) — tune those as a group. Column details: [`data/courses/README.md`](data/courses/README.md).
+Tokyo's climb gradients are quoted from race previews; its segment lengths and descents, plus all wind-exposure labels, are estimates — provenance in [`data/courses/README.md`](data/courses/README.md) and [`references/data-sources.md`](references/data-sources.md). To add or refine a course: split the route into ordered segments, and give each a distance, average grade, a turn penalty where the rider brakes, and a wind label.
+
+## Results so far
+
+> Current model output — reproduce with the scripts in `src/`. Tokyo's gradients and the rider/wind parameters are estimates within sourced ranges, so treat the **magnitudes** as provisional; the **patterns** are the findings.
+
+**Pacing beats flat power.** Custom loop, male TT specialist: riding constant critical power = **440.9 s**; spending the $W'$ reserve on the climbs = **400.7 s** → **~40 s (9%) saved**. (`simulate.py`)
+
+**Wind dominates — and a plan can break.** One plan held into different winds (`sensitivity.py`): a **±4 m/s** shift moves the finish **−61 s to +80 s** (−15% to +20%). Into a headwind the planned reserve-spend goes infeasible — the climbs take longer and drain $W'$ to empty.
+
+**Execution error is asymmetric.** The optimal plan already empties $W'$, so the rider can underperform (−5% power → +9 s) but cannot *sustainably* overperform (going harder runs the reserve negative). A realistic ±5% miss ≈ ±2% on the finish.
+
+**Rider × course cross-over (headline).** Climber minus TT-specialist finishing time (negative = climber faster):
+
+| | custom | Tokyo (hilly) | Flanders (flat) |
+|--|---:|---:|---:|
+| **male** | +8.5 s | **−21.6 s** | +57.9 s |
+| female | +11.5 s | +14.9 s | +93.8 s |
+
+The **male climber wins hilly Tokyo** but loses the flatter courses — the terrain-dependent advantage the problem is built around, matching the real races (climbers/all-rounders won Tokyo, TT engines won Flanders). The **female cross-over is absent at the current parameters** (the female climber's W/kg edge is too small) — a calibration finding, not a model fault. (`compare.py`)
+
+**Validation vs the 2021 winners.** With an elite-but-not-champion archetype (CP 350 W), the model runs **~12–27% slower** than the actual winners (Flanders: 3439 s model vs 2868 s for Ganna). The physics is the right shape; the gap is the archetype CP sitting well below a world-champion's (~490 W). Right model, calibratable inputs.
 
 ## Links
 
