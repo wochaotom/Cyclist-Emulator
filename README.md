@@ -1,6 +1,6 @@
 # M142 Cyclist Model — UCLA Math 142 Group Project
 
-Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem models a **cyclist's performance** — how a rider's power output translates into speed and distance over a course under forces such as aerodynamic drag, gravity on a gradient, and rider fatigue. The model code lives in [`src/`](src/); the written solution lives in Overleaf (linked below).
+Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem models a **cyclist's performance** — how a rider's power output translates into speed and time over a course under aerodynamic drag, rolling resistance, and gravity on a gradient. The model code lives in [`src/`](src/); the written solution lives in Overleaf (linked below).
 
 > **Assignment:** see [`docs/assignment/`](docs/assignment/). Deliverables: a 10–20 page paper, a presentation (≤20 min), peer evaluations, and two professor/TA consultations.
 >
@@ -11,7 +11,7 @@ Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem m
 | Path | What's in it |
 |------|--------------|
 | [`src/`](src/) | The model code — see [The model](#the-model) below. |
-| [`notebooks/model_v2_simple_power.ipynb`](notebooks/model_v2_simple_power.ipynb) | Early prototype — an exploratory time-stepping version. |
+| [`notebooks/model_v2_simple_power.ipynb`](notebooks/model_v2_simple_power.ipynb) | Early prototype (time-stepping). Superseded by `src/`; kept as proof of work. |
 | [`notebooks/archive/`](notebooks/archive/) | Earlier versions, kept as revision history / proof of work. |
 | [`references/`](references/) | Source materials (papers, constants). |
 | [`docs/assignment/`](docs/assignment/) | The official assignment instructions. |
@@ -25,15 +25,15 @@ Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem m
 
 The model takes a **course** (an ordered list of segments) and a **rider power**, and returns the speed and time for each segment plus the total race time.
 
-For each segment it solves a steady-state power balance for the speed `v`:
+For each segment $i$, the rider's power $P_i$ must overcome aerodynamic drag, rolling resistance, and gravity to hold a steady speed $v_i$:
 
-```
-P = v * ( 0.5*rho*CdA*(v + wind)^2   # aerodynamic drag
-          + Crr*m*g                  # rolling resistance
-          + m*g*grade )              # gravity along the slope
-```
+$$P_i = v_i\left[\tfrac{1}{2}\,\rho\,C_dA\,(v_i + w_i)^2 + C_{rr}\,m\,g + m\,g\,\text{grade}_i\right]$$
 
-then adds any turn penalty — `time = distance / v + turn_penalty` — and sums over segments for the total time.
+We know the rider's power and solve this for $v_i$ — there is no closed form (it is cubic in $v_i$), so `physics.py` finds it numerically. The segment time is distance over speed plus a turn penalty $\tau_i$, and the race time is the sum over segments:
+
+$$T_i = \frac{d_i}{v_i} + \tau_i \qquad\qquad T_\text{total} = \sum_i T_i$$
+
+Symbols: $\rho$ air density, $C_dA$ drag area, $C_{rr}$ rolling-resistance coefficient, $m$ rider + bike mass, $g$ gravity, $w_i$ segment headwind, $\text{grade}_i$ slope as a fraction, $d_i$ segment distance, $\tau_i$ turn penalty.
 
 | File | Role |
 |------|------|
@@ -48,7 +48,26 @@ Run it:
 python src/simulate.py
 ```
 
-Course files live in [`data/courses/`](data/courses/) — see the README there for the format.
+## Course parameters
+
+A course is an ordered list of **segments**, stored as a CSV in [`data/courses/`](data/courses/). Each segment carries the four things the model needs:
+
+| Field | Symbol | Meaning |
+|-------|--------|---------|
+| `distance_m` | $d_i$ | Segment length, metres. |
+| `grade_pct` | $\text{grade}_i$ | Average slope in percent (+ up / − down). |
+| `turn_penalty_s` | $\tau_i$ | Time lost braking/cornering, seconds (0 if none). |
+| `wind_exposure` | $w_i$ | `low` / `medium` / `high`, mapped to an effective headwind in [`src/parameters.py`](src/parameters.py). |
+
+The three courses the problem requires:
+
+| File | Course | Status |
+|------|--------|--------|
+| `custom_5km_loop.csv` | Self-designed loop — 4 turns, a climb + descent, returns to start. | Ready (worked example). |
+| `tokyo_olympic_tt.csv` | 2021 Olympic ITT, Tokyo. | Template — to parameterise. |
+| `flanders_world_tt.csv` | 2021 UCI Worlds ITT, Flanders. | Template — to parameterise. |
+
+To parameterise a real course: split the route into segments, then for each give its distance, average grade, a turn penalty wherever the rider must brake, and a wind-exposure label. The wind labels map to headwind speeds in [`src/parameters.py`](src/parameters.py) — tune those as a group. Column details: [`data/courses/README.md`](data/courses/README.md).
 
 ## Links
 
@@ -69,10 +88,8 @@ Course files live in [`data/courses/`](data/courses/) — see the README there f
 git clone https://github.com/wochaotom/Cyclist-Emulator.git
 cd Cyclist-Emulator
 
-# (recommended) isolated Python environment
-python -m venv .venv
-# Windows:  .venv\Scripts\activate      macOS/Linux:  source .venv/bin/activate
-pip install numpy matplotlib jupyter
-
-jupyter notebook notebooks/model_v2_simple_power.ipynb
+# run the model (uses only the Python standard library)
+python src/simulate.py
 ```
+
+The early prototype notebook is optional and needs `pip install numpy matplotlib jupyter` to open.
