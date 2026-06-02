@@ -3,8 +3,8 @@
 
 DEFAULT_PHYSICS = {
     "rho": 1.225,      # air density (kg/m^3)
-    "CdA": 0.25,       # drag area = drag coefficient * frontal area (m^2)
-    "Crr": 0.005,      # rolling resistance coefficient
+    "CdA": 0.21,       # drag area, m^2 (elite TT/aero position ~0.20-0.22)
+    "Crr": 0.004,      # rolling resistance (fast road TT tire on good asphalt)
     "g": 9.81,         # gravity (m/s^2)
     "bike_mass": 8.0,  # bike mass (kg)
 }
@@ -15,7 +15,8 @@ DEFAULT_PHYSICS = {
 # (joules) for going above CP, which refills when they ride below it.
 #   cp       - critical power, watts
 #   w_prime  - anaerobic work capacity, joules
-# Placeholder values - refine from rider data during parameterization.
+# Values sit inside sourced ranges (see references/data-sources.md): elite
+# male TT CP ~340 +/- 30 W, W' ~15-24 kJ; women lower. Group to finalize.
 RIDER_PROFILES = {
     "male_tt":        {"rider_mass": 75, "cp": 350, "w_prime": 22000},
     "female_tt":      {"rider_mass": 62, "cp": 270, "w_prime": 16000},

@@ -1,7 +1,6 @@
 # Data
 
-Empirical or course data the model uses or is checked against — e.g. elevation/gradient profiles, real cyclist power curves, wind data.
+Empirical data the model uses or is validated against.
 
-For each dataset add a short note: what it is, where it came from, and the units. Cite the source in the paper.
-
-(Empty for now.)
+- **`real_results.csv`** — real finishing times from the 2021 Tokyo Olympic and Flanders Worlds individual time trials (the validation targets). Columns: `course, event, distance_km, elevation_m, gender, rider, time_s`. Sources and the physiological/physics parameter citations are in [`../references/data-sources.md`](../references/data-sources.md).
+- **`courses/`** — course segment files the model reads (see [`courses/README.md`](courses/README.md)).

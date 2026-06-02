@@ -35,12 +35,15 @@ $$T_i = \frac{d_i}{v_i} + \tau_i \qquad\qquad T_\text{total} = \sum_i T_i$$
 
 Symbols: $\rho$ air density, $C_dA$ drag area, $C_{rr}$ rolling-resistance coefficient, $m$ rider + bike mass, $g$ gravity, $w_i$ segment headwind, $\text{grade}_i$ slope as a fraction, $d_i$ segment distance, $\tau_i$ turn penalty.
 
+**Rider model and pacing.** Each rider is a *critical-power* model: a sustainable power $\text{CP}$ plus a finite anaerobic reserve $W'$ (joules). Riding above CP drains the reserve at rate $P-\text{CP}$; riding below refills it; it can never go negative — that single rule is the rider's energy/fatigue limit. The model compares two strategies: holding CP the whole way (never spending the reserve) versus spending $W'$ on the climbs, where it buys the most time. The gap between them is the value of pacing.
+
 | File | Role |
 |------|------|
 | [`src/parameters.py`](src/parameters.py) | Physics constants and rider profiles. |
 | [`src/course.py`](src/course.py) | Loads a course CSV into segments. |
 | [`src/physics.py`](src/physics.py) | Solves speed from power for one segment. |
-| [`src/simulate.py`](src/simulate.py) | Runs one rider over one course and prints segment times. |
+| [`src/pacing.py`](src/pacing.py) | Critical-power reserve (W′) accounting and pacing strategies. |
+| [`src/simulate.py`](src/simulate.py) | Runs constant-CP vs. paced riding and reports the time saved. |
 
 Run it:
 

@@ -1,0 +1,13 @@
+course,event,distance_km,elevation_m,gender,rider,time_s
+tokyo_2021,olympic_itt,44.2,846,M,Primoz Roglic,3304.19
+tokyo_2021,olympic_itt,44.2,846,M,Tom Dumoulin,3365.58
+tokyo_2021,olympic_itt,44.2,846,M,Rohan Dennis,3368.09
+tokyo_2021,olympic_itt,22.1,423,F,Annemiek van Vleuten,1813.49
+tokyo_2021,olympic_itt,22.1,423,F,Marlen Reusser,1869.96
+tokyo_2021,olympic_itt,22.1,423,F,Anna van der Breggen,1875.12
+flanders_2021,worlds_itt,43.3,78,M,Filippo Ganna,2867.83
+flanders_2021,worlds_itt,43.3,78,M,Wout van Aert,2873.20
+flanders_2021,worlds_itt,43.3,78,M,Remco Evenepoel,2911.17
+flanders_2021,worlds_itt,30.3,54,F,Ellen van Dijk,2165.28
+flanders_2021,worlds_itt,30.3,54,F,Marlen Reusser,2175.57
+flanders_2021,worlds_itt,30.3,54,F,Annemiek van Vleuten,2189.30
