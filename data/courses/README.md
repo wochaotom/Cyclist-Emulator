@@ -15,7 +15,7 @@ Each course is a CSV of segments, read by `src/course.py`. One row per segment, 
 
 | File | Course | Status |
 |------|--------|--------|
-| `custom_5km_loop.csv` | Self-designed loop — 4 turns, a climb + descent, returns to start. | Ready. |
+| `custom_5km_loop.csv` | Self-designed **technical loop** — 4 sharp turns, a short steep ramp, returns to start. | Ready. |
 | `tokyo_olympic_tt.csv` | 2021 Olympic ITT, Tokyo — one 22.1 km lap (women's course; the men ride **2 laps = 44.2 km**). | Climb gradients sourced; lengths/descents inferred. |
 | `flanders_world_tt.csv` | 2021 UCI Worlds ITT, Flanders — men's **43.3 km** (women's = 30.3 km, shorter). | Confirmed pan-flat. |
 
