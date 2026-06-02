@@ -15,8 +15,8 @@ Each course is a CSV of segments, read by `src/course.py`. One row per segment, 
 
 | File | Course | Status |
 |------|--------|--------|
-| `custom_5km_loop.csv` | Self-designed loop (4 turns, a climb + descent, returns to start). | Worked example, ready. |
-| `tokyo_olympic_tt.csv` | 2021 Olympic individual time trial, Tokyo. | Template — fill from the real route. |
-| `flanders_world_tt.csv` | 2021 UCI Worlds individual time trial, Flanders. | Template — fill from the real route. |
+| `custom_5km_loop.csv` | Self-designed loop — 4 turns, a climb + descent, returns to start. | Ready. |
+| `tokyo_olympic_tt.csv` | 2021 Olympic ITT, Tokyo — one 22.1 km lap (women's course; the men ride **2 laps = 44.2 km**). | **First-pass estimate — verify.** |
+| `flanders_world_tt.csv` | 2021 UCI Worlds ITT, Flanders — men's **43.3 km** (women's = 30.3 km, shorter). | **First-pass estimate — verify.** |
 
-The two real courses are required by the problem. Add the segment breakdown (distances, grades, turns, wind) from public route data during course parameterization.
+> ⚠️ **Tokyo and Flanders are first-pass estimates, not measured data.** The total distance, elevation, route order, and wind exposure come from sourced facts (see [`../../references/data-sources.md`](../../references/data-sources.md)), but **per-segment gradients are not published** — the Tokyo profile is *estimated* to match the published ~423 m of climbing per lap, and Flanders is treated as flat (~78 m total). Correct these from a GPX/Strava trace before relying on them in the paper.

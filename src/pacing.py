@@ -15,8 +15,11 @@ from physics import speed_from_power
 from parameters import WIND_EXPOSURE
 
 
-def simulate_pacing(course, powers, mass, phys, cp, w_prime):
+def simulate_pacing(course, powers, mass, phys, cp, w_prime, wind_offset=0.0):
     """Run a course at the given per-segment powers, tracking the W' reserve.
+
+    wind_offset (m/s) is added to every segment's headwind - positive is extra
+    headwind, negative is a tailwind. Used by the wind sensitivity analysis.
 
     Returns (rows, total_time, feasible):
       rows     - list of (segment, power, speed, seg_time, reserve_left)
@@ -27,7 +30,7 @@ def simulate_pacing(course, powers, mass, phys, cp, w_prime):
     rows = []
     total_time = 0.0
     for seg, power in zip(course, powers):
-        wind = WIND_EXPOSURE[seg.wind_exposure]
+        wind = WIND_EXPOSURE[seg.wind_exposure] + wind_offset
         speed = speed_from_power(power, seg.grade, wind, mass, phys)
         seg_time = seg.distance_m / speed + seg.turn_penalty_s
 

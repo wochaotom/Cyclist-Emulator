@@ -1,1 +1,10 @@
 segment_id,name,distance_m,grade_pct,turn_penalty_s,wind_exposure
+1,Beach seafront start,1500,0,0,high
+2,Sharp turn inland (Knokke-Heist),2000,0,5,high
+3,Open polder straight (Westkapelle),8000,0,2,high
+4,Oostkerke section,5000,0,3,medium
+5,Dudzele canal approach,8000,0,2,medium
+6,Boudewijnkanaal into Bruges,5000,0,3,low
+7,Bruges U-turn,1000,0,6,low
+8,Return via Damse Vaart,9000,0,3,medium
+9,Run-in to t Zand finish,3800,0,4,low
