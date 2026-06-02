@@ -2,34 +2,35 @@
 
 A short guide so we collaborate cleanly and leave a clear trail of who did what — which doubles as **proof of work** for the consultations.
 
+**New to git? Read [`START-HERE.md`](START-HERE.md) first** — it walks you through setup with GitHub Desktop, no command line needed.
+
 ## Golden rules
 
 1. **Commit from your own GitHub account.** Commits are attributed to their author; that attribution is the evidence the work was genuinely shared across the group.
-2. **Commit early and often.** Small, frequent commits with clear messages tell the story of how the model evolved. A perfect model with no history gets scrutinized.
+2. **Commit and push often.** Small, frequent commits tell the story of how the model evolved — and anything you've pushed is safely backed up. A perfect model with no history gets scrutinized.
 
-## Workflow (pull requests)
+## Workflow
 
-We use a light pull-request workflow so changes get a second pair of eyes:
+Everyone works directly on `main` — the simplest thing that works for a one-week project. In GitHub Desktop the loop is:
 
+1. **Fetch origin** — get everyone's latest work. **Always do this first.**
+2. Make your changes.
+3. **Commit to main** with a one-line summary.
+4. **Push origin** when you stop.
+
+Two habits keep it painless:
+- **Fetch/pull before you start** (avoids upload clashes).
+- **Don't edit the same notebook as someone else at the same time** — call it in the group chat first. `.ipynb` files conflict badly.
+
+**Comfortable with git and want a safety net for a bigger change?** Optional — branch, push, open a PR:
 ```bash
-# start from an up-to-date main
-git checkout main && git pull
-
-# make a branch for your piece of work:  <yourname>/<short-topic>
-git checkout -b carter/fatigue-tuning
-
-# work, then commit
-git add -A
-git commit -m "Tune fatigue recovery rate and note the reasoning"
-
-# push and open a pull request
-git push -u origin carter/fatigue-tuning
-gh pr create          # or open the PR link GitHub prints
+git checkout -b yourname/topic
+# ...make changes, commit...
+git push -u origin yourname/topic   # then open the PR link GitHub prints
 ```
+Direct-to-`main` is the default, though.
 
-A teammate reviews and merges into `main`. For tiny fixes (a README typo, say) committing straight to `main` is fine.
-
-## Python environment
+## Python environment (only if running the notebooks)
 
 ```bash
 python -m venv .venv
@@ -41,9 +42,9 @@ pip install numpy matplotlib jupyter
 
 Notebooks are stored as JSON, outputs included, so they can produce noisy diffs and the occasional merge conflict.
 
-- Try to have **one person own a given notebook** at a time.
-- The current working notebook is [`notebooks/model_v2_simple_power.ipynb`](notebooks/model_v2_simple_power.ipynb). Older versions live in [`notebooks/archive/`](notebooks/archive/) — **don't delete them**, they're our history.
-- If conflicts get annoying, we'll add [`nbstripout`](https://github.com/kynan/nbstripout) to strip outputs before commit:
+- **One person owns a given notebook at a time** — coordinate before two of you touch [`notebooks/model_v2_simple_power.ipynb`](notebooks/model_v2_simple_power.ipynb).
+- Older versions live in [`notebooks/archive/`](notebooks/archive/) — don't delete them, they're our history.
+- If conflicts get annoying, add [`nbstripout`](https://github.com/kynan/nbstripout) to strip outputs before commit:
   ```bash
   pip install nbstripout && nbstripout --install
   ```

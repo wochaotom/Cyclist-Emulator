@@ -3,6 +3,8 @@
 Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem models a **cyclist's performance** — how a rider's power output translates into speed and distance over a course under forces such as aerodynamic drag, gravity on a gradient, and rider fatigue. The mathematical work lives in the notebooks; the written solution lives in Overleaf (linked below).
 
 > **Assignment:** see [`docs/assignment/`](docs/assignment/). Deliverables: a 10–20 page paper, a presentation (≤20 min), peer evaluations, and two professor/TA consultations.
+>
+> 🚀 **New to the team or to git? Start with [`START-HERE.md`](START-HERE.md)** — 10-minute setup, no command line needed.
 
 ## Repository layout
 
