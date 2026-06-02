@@ -16,7 +16,9 @@ Each course is a CSV of segments, read by `src/course.py`. One row per segment, 
 | File | Course | Status |
 |------|--------|--------|
 | `custom_5km_loop.csv` | Self-designed loop — 4 turns, a climb + descent, returns to start. | Ready. |
-| `tokyo_olympic_tt.csv` | 2021 Olympic ITT, Tokyo — one 22.1 km lap (women's course; the men ride **2 laps = 44.2 km**). | **First-pass estimate — verify.** |
-| `flanders_world_tt.csv` | 2021 UCI Worlds ITT, Flanders — men's **43.3 km** (women's = 30.3 km, shorter). | **First-pass estimate — verify.** |
+| `tokyo_olympic_tt.csv` | 2021 Olympic ITT, Tokyo — one 22.1 km lap (women's course; the men ride **2 laps = 44.2 km**). | Climb gradients sourced; lengths/descents inferred. |
+| `flanders_world_tt.csv` | 2021 UCI Worlds ITT, Flanders — men's **43.3 km** (women's = 30.3 km, shorter). | Confirmed pan-flat. |
 
-> ⚠️ **Tokyo and Flanders are first-pass estimates, not measured data.** The total distance, elevation, route order, and wind exposure come from sourced facts (see [`../../references/data-sources.md`](../../references/data-sources.md)), but **per-segment gradients are not published** — the Tokyo profile is *estimated* to match the published ~423 m of climbing per lap, and Flanders is treated as flat (~78 m total). Correct these from a GPX/Strava trace before relying on them in the paper.
+> ℹ️ **Provenance.** Tokyo's climb gradients (main climb 8.9 → 5.9 → 4 → 11%, second climb to 8.9%) are quoted from the Cyclingnews ITT previews — but the **segment lengths and descent gradients are inferred** to match the published 22.1 km lap and ~423 m of climbing. Flanders is **pan-flat** (78 m over 43.3 km, no published climbs), so the flat profile is appropriate; the official UCI technical guide has the km-marked profile. Full sources: [`../../references/data-sources.md`](../../references/data-sources.md).
+>
+> For an exact route, the clean GPX is on La Flamme Rouge (browser **Export GPX**, no login). Drop it in a `raw/` folder here and I'll convert it to the CSV.

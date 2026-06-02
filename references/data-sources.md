@@ -23,6 +23,12 @@ Machine-readable in [`../data/real_results.csv`](../data/real_results.csv).
 - **CdA:** elite TT / aero position ~0.20–0.22 m². [BestBikeSplit](https://www.bestbikesplit.com/blog/cda-aerodynamic-drag-coefficient-cycling)
 - **Crr:** road TT tire on good asphalt ~0.003–0.005 (default 0.004). [BestBikeSplit](https://www.bestbikesplit.com/blog/rolling-resistance-cycling-triathlon)
 
+## Course geometry and gradients
+
+- **Tokyo (Fuji Speedway lap):** per-segment climb gradients — main climb 8.9% → 5.9% → 4% → 11% pitch, second climb to 8.9% — from the Cyclingnews ITT previews ([women's](https://www.cyclingnews.com/races/olympic-games-2021/women-s-individual-time-trial/preview/), [men's](https://www.cyclingnews.com/races/olympic-games-2021/men-s-individual-time-trial/preview/)). Men repeat the women's 22.1 km lap. Segment lengths and descent gradients in `tokyo_olympic_tt.csv` are *inferred* to match the published 22.1 km / ~423 m per lap.
+- **Flanders:** pan-flat (78 m men / 54 m women, no published climbs). Official km-marked profile in the [UCI Flanders 2021 Technical Guide PDF](https://downloads.ctfassets.net/761l7gh5x5an/lYf25TYStUnbzj6vRXM7f/00f43906c8264b99813bed9102d8bc45/guide-tech-cdmr-flandres-2021-eng-web-md.pdf) (pp. 36–37 men, 42–43 women).
+- **Ready-made GPX** (browser export, no login, not scriptable): La Flamme Rouge [Flanders ME ITT](https://www.la-flamme-rouge.eu/maps/viewtrack/414042).
+
 ## Not yet verified — confirm before relying on
 - Tokyo per-climb gradients (only aggregate ~19 m/km known; per-climb % not published).
 - Worlds elevation (single-sourced: men ~78 m, women ~54 m).
