@@ -18,6 +18,7 @@ from parameters import DEFAULT_PHYSICS, RIDER_PROFILES
 
 
 def paced_time(course, rider, phys=DEFAULT_PHYSICS):
+    """Total finishing time for a rider's paced ride on a course."""
     mass = rider["rider_mass"] + phys["bike_mass"]
     plan = spend_on_slow_segments(course, mass, phys, rider["cp"], rider["w_prime"])
     _, total, _ = simulate_pacing(course, plan, mass, phys, rider["cp"], rider["w_prime"])

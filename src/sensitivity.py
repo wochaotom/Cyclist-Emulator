@@ -1,7 +1,7 @@
 """Sensitivity analyses required by the problem: how the finishing time responds
 to (1) wind and (2) the rider missing the target power.
 
-Both take the paced plan (spend the reserve on the climbs) and re-run it under a
+Both take the paced plan (spend the reserve on the slow sections) and re-run it under a
 perturbation, answering "if conditions or execution differ from the plan, how
 much does the time move?"
 """

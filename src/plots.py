@@ -23,17 +23,20 @@ PHYS = DEFAULT_PHYSICS
 
 
 def rider(name):
+    """Total mass (rider + bike), CP, and W' for a named rider profile."""
     r = RIDER_PROFILES[name]
     return r["rider_mass"] + PHYS["bike_mass"], r["cp"], r["w_prime"]
 
 
 def paced(course, name, wind_offset=0.0):
+    """Run a rider's paced ride on a course; returns (rows, total_time, feasible)."""
     mass, cp, wp = rider(name)
     plan = spend_on_slow_segments(course, mass, PHYS, cp, wp)
     return simulate_pacing(course, plan, mass, PHYS, cp, wp, wind_offset)
 
 
 def fig_pacing_profile():
+    """Figure: speed and remaining W' reserve along the custom loop."""
     course = load_course(os.path.join(COURSES, "custom_5km_loop.csv"))
     rows, _, _ = paced(course, "male_tt")
     x, speed, reserve = [], [], []
@@ -57,6 +60,7 @@ def fig_pacing_profile():
 
 
 def fig_crossover():
+    """Figure: climber minus TT-specialist finishing time for each course."""
     courses = {name: load_course(os.path.join(COURSES, f))
                for name, f in [("Custom", "custom_5km_loop.csv"),
                                ("Tokyo", "tokyo_olympic_tt.csv"),
@@ -82,6 +86,7 @@ def fig_crossover():
 
 
 def fig_wind():
+    """Figure: finish time vs a uniform wind offset."""
     course = load_course(os.path.join(COURSES, "custom_5km_loop.csv"))
     offsets = [-4, -3, -2, -1, 0, 1, 2, 3, 4]
     times = [paced(course, "male_tt", off)[1] for off in offsets]
@@ -98,6 +103,7 @@ def fig_wind():
 
 
 def fig_validation():
+    """Figure: model time vs the real 2021 men's winners."""
     # fastest man on each real course, from the results file
     real = {}
     with open(os.path.join(HERE, "..", "data", "real_results.csv"), newline="") as f:

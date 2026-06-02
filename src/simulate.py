@@ -8,6 +8,11 @@ from parameters import DEFAULT_PHYSICS, RIDER_PROFILES
 
 
 def run(course_path, rider_name, phys=DEFAULT_PHYSICS):
+    """Run constant-CP and paced strategies for one rider on one course.
+
+    Returns (cp, w_prime, flat, paced), where flat and paced are each the
+    (rows, total_time, feasible) tuple from simulate_pacing.
+    """
     course = load_course(course_path)
     rider = RIDER_PROFILES[rider_name]
     mass = rider["rider_mass"] + phys["bike_mass"]
@@ -22,6 +27,7 @@ def run(course_path, rider_name, phys=DEFAULT_PHYSICS):
 
 
 def print_report(rider_name, cp, w_prime, flat, paced):
+    """Print the paced per-segment table and the two strategies' total times."""
     flat_rows, flat_time, _ = flat
     paced_rows, paced_time, _ = paced
 
