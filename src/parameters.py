@@ -9,6 +9,10 @@ DEFAULT_PHYSICS = {
     "bike_mass": 8.0,  # bike mass (kg)
 }
 
+# The two rider types the problem asks for: a time-trial specialist and a
+# climber, each as a male and female profile. `sustainable_power` is a single
+# constant-power stand-in for now - it becomes a full power curve (max power vs
+# duration) plus an energy budget once we move past the baseline model.
 RIDER_PROFILES = {
     "male_tt":        {"rider_mass": 75, "sustainable_power": 320},
     "female_tt":      {"rider_mass": 62, "sustainable_power": 240},

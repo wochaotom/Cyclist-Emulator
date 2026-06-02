@@ -11,4 +11,12 @@ Each course is a CSV of segments, read by `src/course.py`. One row per segment, 
 | `turn_penalty_s` | Seconds lost to braking/cornering on this segment (0 if none). |
 | `wind_exposure` | `low`, `medium`, or `high` — mapped to an effective headwind in `src/parameters.py`. |
 
-`custom_5km_loop.csv` is a worked example. Real courses (time-trial routes, etc.) get added here as we parameterise them.
+## Courses
+
+| File | Course | Status |
+|------|--------|--------|
+| `custom_5km_loop.csv` | Self-designed loop (4 turns, a climb + descent, returns to start). | Worked example, ready. |
+| `tokyo_olympic_tt.csv` | 2021 Olympic individual time trial, Tokyo. | Template — fill from the real route. |
+| `flanders_world_tt.csv` | 2021 UCI Worlds individual time trial, Flanders. | Template — fill from the real route. |
+
+The two real courses are required by the problem. Add the segment breakdown (distances, grades, turns, wind) from public route data during course parameterization.

@@ -15,6 +15,7 @@ Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem m
 | [`notebooks/archive/`](notebooks/archive/) | Earlier versions, kept as revision history / proof of work. |
 | [`references/`](references/) | Source materials (papers, constants). |
 | [`docs/assignment/`](docs/assignment/) | The official assignment instructions. |
+| [`docs/problem.md`](docs/problem.md) | The problem (2022 MCM A) and a requirements checklist. |
 | [`docs/paper-outline.md`](docs/paper-outline.md) | Rubric-aligned section skeleton for the write-up. |
 | [`docs/proof-of-work/`](docs/proof-of-work/) | Photos/scans of handwritten derivations, scratch work, meeting notes — bring these to consultations. |
 | [`data/courses/`](data/courses/) | Course files (CSV of segments) the model reads. |
