@@ -38,16 +38,11 @@ python -m venv .venv
 pip install numpy matplotlib jupyter
 ```
 
-## Working with notebooks
+## Working with the code and notebooks
 
-Notebooks are stored as JSON, outputs included, so they can produce noisy diffs and the occasional merge conflict.
+The model is plain Python in [`src/`](src/) — it diffs and merges cleanly, so just edit it normally and follow the loop above.
 
-- **One person owns a given notebook at a time** — coordinate before two of you touch [`notebooks/model_v2_simple_power.ipynb`](notebooks/model_v2_simple_power.ipynb).
-- Older versions live in [`notebooks/archive/`](notebooks/archive/) — don't delete them, they're our history.
-- If conflicts get annoying, add [`nbstripout`](https://github.com/kynan/nbstripout) to strip outputs before commit:
-  ```bash
-  pip install nbstripout && nbstripout --install
-  ```
+The notebooks in [`notebooks/archive/`](notebooks/archive/) are **frozen prototypes** kept as proof of work — don't edit or delete them. (Notebooks store JSON with their outputs, so they merge badly; that's part of why the live model moved to `.py` files.)
 
 ## Proof of work
 

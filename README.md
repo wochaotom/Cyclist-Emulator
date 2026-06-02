@@ -11,8 +11,7 @@ Group modeling project for **UCLA Math 142** (COMAP-style). Our chosen problem m
 | Path | What's in it |
 |------|--------------|
 | [`src/`](src/) | The model code — see [The model](#the-model) below. |
-| [`notebooks/model_v2_simple_power.ipynb`](notebooks/model_v2_simple_power.ipynb) | Early prototype (time-stepping). Superseded by `src/`; kept as proof of work. |
-| [`notebooks/archive/`](notebooks/archive/) | Earlier versions, kept as revision history / proof of work. |
+| [`notebooks/archive/`](notebooks/archive/) | All prototype notebooks (v1, fatigue-plan, v2 time-stepping) — kept as revision history / proof of work. |
 | [`references/`](references/) | Source materials (papers, constants). |
 | [`docs/assignment/`](docs/assignment/) | The official assignment instructions. |
 | [`docs/problem.md`](docs/problem.md) | The problem (2022 MCM A) and a requirements checklist. |
