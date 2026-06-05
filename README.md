@@ -34,7 +34,7 @@ $$P_\text{target} = \max(50,\ P_\text{base} + k_\text{hill}\,\theta), \qquad P_\
 
 Fatigue grows when output exceeds a threshold and recovers below it (clamped to $[0,1]$):
 
-$$\Delta\text{fat} = \begin{cases} +\,r_\text{fat}\left(\dfrac{P_\text{out}-P_\text{thr}}{P_\text{thr}}\right)^2 \Delta t & P_\text{out} > P_\text{thr} \\[2mm] -\,r_\text{rec}\,\Delta t & \text{otherwise} \end{cases}$$
+$$\Delta\text{fat} = \begin{cases} +\,r_\text{fat}\left(\dfrac{P_\text{out}-P_\text{thr}}{P_\text{thr}}\right)^2 \Delta t & P_\text{out} > P_\text{thr} \\ -\,r_\text{rec}\,\Delta t & \text{otherwise} \end{cases}$$
 
 Each segment also adds its `turn_penalty_s` to the clock for cornering. Symbols map to code as $\rho$ = `a_density`, $C_dA$ = `CdA`, $C_{rr}$ = `Crr`, $k_\text{hill}$ = `hill_factor`, $P_\text{thr}$ = `P_threshold`, $c_\text{fat}$ = `fatigue_impact`, $r_\text{fat}$ = `fatigue_rate`, $r_\text{rec}$ = `recovery_rate`. Parameter values and their justification are in the team write-up.
 
