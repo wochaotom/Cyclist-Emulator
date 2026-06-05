@@ -75,6 +75,19 @@ Riders load the same way as courses — one row per profile in `data/rider_profi
 
 `Crr`, `v_max`, and the fatigue tuning constants are shared across riders and stay in the notebook, not the profile.
 
+## Real-world results (validation targets)
+
+The model is checked against the actual 2021 finishing times (machine-readable in `data/real_results.csv`, top three per race):
+
+| Course | Distance | Winner | Time |
+|--------|---------:|--------|-----:|
+| Tokyo 2021 Olympic ITT (men) | 44.2 km | Primož Roglič | 55:04 |
+| Tokyo 2021 Olympic ITT (women) | 22.1 km | Annemiek van Vleuten | 30:13 |
+| Flanders 2021 Worlds ITT (men) | 43.3 km | Filippo Ganna | 47:48 |
+| Flanders 2021 Worlds ITT (women) | 30.3 km | Ellen van Dijk | 36:05 |
+
+Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_the_2020_Summer_Olympics_%E2%80%93_Men's_road_time_trial) / [women's](https://en.wikipedia.org/wiki/Cycling_at_the_2020_Summer_Olympics_%E2%80%93_Women's_road_time_trial), Flanders [men's](https://en.wikipedia.org/wiki/2021_UCI_Road_World_Championships_%E2%80%93_Men's_time_trial) / [women's](https://en.wikipedia.org/wiki/2021_UCI_Road_World_Championships_%E2%80%93_Women's_time_trial). Full top-three times and citations in `references/data-sources.md`.
+
 ## Requirements & status
 
 2022 MCM Problem A. Full statement: `references/2022_PowerOfCyclist.pdf`.
