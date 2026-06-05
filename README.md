@@ -62,13 +62,27 @@ A course is an ordered list of segments in a CSV under `data/courses/`. Columns:
 
 Distance and gradient are sourced; turn penalty and wind label are modeling assignments. Per-field provenance is in `data/courses/README.md` and `references/data-sources.md`.
 
+## Rider profiles
+
+Riders load the same way as courses — one row per profile in `data/rider_profiles.csv`, selected by `rider = "..."` in the notebook's Rider Parameters cell. `baseline` reproduces the originally submitted rider; the typed profiles are derived from the sourced ranges (power from W/kg figures × an assumed body mass, CdA by rider type; female values scaled and flagged — see `data/README.md`).
+
+| profile_id | gender | type | mass (kg) | CdA (m²) | P_base (W) | P_threshold (W) | P_max (W) |
+|------------|--------|------|----------:|---------:|-----------:|----------------:|----------:|
+| `baseline` | — | generic | 75 | 0.26 | 250 | 300 | 400 |
+| `male_tt` | M | time trial | 80 | 0.21 | 370 | 400 | 600 |
+| `female_tt` | F | time trial | 70 | 0.20 | 260 | 280 | 420 |
+| `male_climber` | M | climber | 70 | 0.25 | 325 | 350 | 525 |
+| `female_climber` | F | climber | 62 | 0.23 | 230 | 250 | 375 |
+
+`Crr`, `v_max`, and the fatigue tuning constants are shared across riders and stay in the notebook, not the profile.
+
 ## Requirements & status
 
 2022 MCM Problem A. Detailed statement: `docs/problem.md` and `references/2022_PowerOfCyclist.pdf`.
 
-**Riders**
-- [ ] Two rider types — a time-trial specialist and one other (climber / sprinter / rouleur / puncheur)
-- [ ] Both genders
+**Riders** — *profiles built (`data/rider_profiles.csv`); comparison results not yet written up*
+- [x] Two rider types — time-trial specialist and climber
+- [x] Both genders (male + female of each type)
 
 **Courses** — *course files parameterized; model results not yet produced*
 - [x] Tokyo 2021 Olympic ITT — `data/courses/tokyo_olympic_tt.csv`
@@ -76,15 +90,16 @@ Distance and gradient are sourced; turn penalty and wind label are modeling assi
 - [x] Self-designed course (≥4 sharp turns, ≥1 grade, finish near start) — `data/courses/custom_5km_loop.csv`
 
 **Analysis**
-- [ ] Power distribution vs. position that minimizes time
-- [ ] Weather (wind) sensitivity
-- [ ] Power-deviation sensitivity (missed target power → split-time range)
+- [ ] Power distribution vs. position that minimizes time (within the energy/fatigue limits)
+- [ ] Weather sensitivity — wind direction and strength
+- [ ] Power-deviation sensitivity (missed target power → range of split times)
 
 **Extension**
 - [ ] Team time trial of six riders (team time set by the fourth finisher) — discussion only
 
 **Write-up**
 - [ ] M142 structure (`docs/paper-outline.md`), not the contest's 25-page format
+- [ ] *(Optional, contest-only)* two-page Directeur Sportif race guidance — likely not required for M142; confirm with the professor
 
 The model (`notebooks/model_v3.ipynb`) and the three course files exist. Earlier figures/tables in `paper/` came from the retired CP/W′ model and do not carry over. The model currently predicts times well above the real results in `data/real_results.csv` — a parameter-calibration item, not a structural one.
 
@@ -97,7 +112,12 @@ pip install numpy matplotlib jupyter
 jupyter notebook notebooks/model_v3.ipynb
 ```
 
-Select the course at the top of the course cell: `course_file = "tokyo_olympic_tt.csv"` (or `flanders_world_tt.csv`, `custom_5km_loop.csv`).
+Then Run All. Two one-line switches choose what gets simulated:
+
+- **Rider** — in the Rider Parameters cell: `rider = "baseline"` (or `male_tt`, `female_tt`, `male_climber`, `female_climber`).
+- **Course** — in the Course Inputs cell: `course_file = "tokyo_olympic_tt.csv"` (or `flanders_world_tt.csv`, `custom_5km_loop.csv`).
+
+Each run prints total time, distance, peak speed, and final fatigue, and plots speed / distance / drag / gradient / fatigue. Step through the rider × course combinations to build the comparison.
 
 ## Team
 
@@ -105,5 +125,7 @@ Select the course at the top of the course cell: `course_file = "tokyo_olympic_t
 |------|--------|------|
 | Carter Dandridge | @wochaotom | Course parameters |
 | Ben Miller | @benmiller74 | Rider model & parameters |
+| Dennis Lee | _TBD_ | _TBD_ |
+| Prannay Veerabahu | _TBD_ | _TBD_ |
 
 Workflow: `CONTRIBUTING.md`. First-time git setup: `START-HERE.md`.
