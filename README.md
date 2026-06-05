@@ -86,6 +86,8 @@ The model is checked against the actual 2021 finishing times (machine-readable i
 | Flanders 2021 Worlds ITT (men) | 43.3 km | Filippo Ganna | 47:48 |
 | Flanders 2021 Worlds ITT (women) | 30.3 km | Ellen van Dijk | 36:05 |
 
+Real ITT winners are time-trial specialists or rouleurs, so these times validate the model's TT-specialist profile. Real races don't produce a separate time per rider *type* (only per rider), so the climber profile is a model exploration, not a measured comparison — the split here is by gender and course, which is all the real data provides.
+
 Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_the_2020_Summer_Olympics_%E2%80%93_Men's_road_time_trial) / [women's](https://en.wikipedia.org/wiki/Cycling_at_the_2020_Summer_Olympics_%E2%80%93_Women's_road_time_trial), Flanders [men's](https://en.wikipedia.org/wiki/2021_UCI_Road_World_Championships_%E2%80%93_Men's_time_trial) / [women's](https://en.wikipedia.org/wiki/2021_UCI_Road_World_Championships_%E2%80%93_Women's_time_trial). Full top-three times and citations in `references/data-sources.md`.
 
 ## Requirements & status
