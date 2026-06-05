@@ -37,7 +37,7 @@ Rider parameter sets the model loads — one row per profile, selected by `rider
 
 ### How the typed profiles were derived
 
-Each typed profile is a literature-anchored estimate, not a measured athlete. Sustainable power is a published W/kg figure times an assumed body mass; `P_base` ≈ 0.93 × `P_threshold` (flat-ground power held just under threshold, so flat riding does not build fatigue); `P_max` ≈ 1.5 × `P_threshold` (a nominal short-effort ceiling that rarely binds on these courses); `CdA` is the wind-tunnel range for the rider type, with the female values scaled down ~10% (no measured female TT CdA exists in the literature). Body masses are assumptions — TT specialists heavier, climbers lighter, women lighter — plus a ~8 kg bike.
+Each typed profile is a literature-anchored estimate, not a measured athlete. Sustainable power is a published W/kg figure times an assumed body mass; `P_base` ≈ 0.93 × `P_threshold` (flat-ground power held just under threshold, so flat riding does not build fatigue); `P_max` ≈ 1.5 × `P_threshold` (a nominal short-effort ceiling that rarely binds on these courses); `CdA` is the wind-tunnel range for the rider type, with the female values scaled down ~10% (no measured female TT CdA exists in the literature). Body masses are assumptions — TT specialists heavier, climbers lighter, women lighter — plus a ~8 kg bike (the light end of the sourced 7–14 kg range — a race TT bike sits near the bottom; range cited to Bicycle Warehouse in [`../references/data-sources.md`](../references/data-sources.md)).
 
 | Profile | Body + bike (kg) | W/kg → P_threshold | P_base (≈0.93×) | P_max (≈1.5×) | CdA |
 |---------|-----------------:|--------------------|----------------:|--------------:|-----|
