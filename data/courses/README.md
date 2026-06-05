@@ -1,6 +1,6 @@
 # Course files
 
-Each course is a CSV of segments, read by `src/course.py`. One row per segment, in order along the course.
+Each course is a CSV of segments, read by the model. One row per segment, in order along the course.
 
 | Column | Meaning |
 |--------|---------|
@@ -9,7 +9,7 @@ Each course is a CSV of segments, read by `src/course.py`. One row per segment, 
 | `distance_m` | Segment length in metres. |
 | `grade_pct` | Average gradient in percent (+ uphill, − downhill). |
 | `turn_penalty_s` | Seconds lost to braking/cornering on this segment (0 if none). |
-| `wind_exposure` | `low`, `medium`, or `high` — mapped to an effective headwind in `src/parameters.py`. |
+| `wind_exposure` | `low`, `medium`, or `high` — mapped to an effective headwind in the model. |
 
 ## Courses
 

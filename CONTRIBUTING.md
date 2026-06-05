@@ -38,11 +38,11 @@ python -m venv .venv
 pip install numpy matplotlib jupyter
 ```
 
-## Working with the code and notebooks
+## Working with the notebook
 
-The model is plain Python in [`src/`](src/) — it diffs and merges cleanly, so just edit it normally and follow the loop above.
+The model is the notebook [`notebooks/model_v3.ipynb`](notebooks/model_v3.ipynb). Notebooks store JSON with their outputs, so they merge badly — **one person owns the notebook at a time**; say so in the group chat before you edit it.
 
-The notebooks in [`notebooks/archive/`](notebooks/archive/) are **frozen prototypes** kept as proof of work — don't edit or delete them. (Notebooks store JSON with their outputs, so they merge badly; that's part of why the live model moved to `.py` files.)
+The prototypes in [`notebooks/archive/`](notebooks/archive/) and the retired CP/W′ model in [`archive/`](archive/) are kept as proof of work — don't edit them.
 
 ## Proof of work
 
