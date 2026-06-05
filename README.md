@@ -9,7 +9,7 @@ UCLA Math 142 group project for 2022 MCM Problem A (power profile of a cyclist):
 | `notebooks/model_v3.ipynb` | The model: time-stepping simulation with power-threshold fatigue. |
 | `data/courses/` | Course files (CSV, one row per segment) — the course parameters. |
 | `data/real_results.csv` | 2021 ITT finishing times used as validation targets. |
-| `data/rider_profiles.csv` | Rider parameter sets (one row per profile) — the rider profiles. |
+| `data/rider_profiles.csv` | Rider parameter sets (one row per profile) |
 | `references/data-sources.md` | Sources for course geometry, race results, and physical/physiological parameters. |
 | `references/references.md` | Deduplicated citation list. |
 | `docs/assignment/` | Official assignment instructions. |
@@ -140,6 +140,6 @@ Each run prints total time, distance, peak speed, and final fatigue, and plots s
 | Carter Dandridge | @wochaotom | Course parameters |
 | Ben Miller | @benmiller74 | Rider model & parameters |
 | Dennis Lee | _TBD_ | _TBD_ |
-| Prannay Veerabahu | _TBD_ | _TBD_ |
+| Prannay Veerabahu | @pveeraba28 | _TBD_ |
 
 Workflow: `CONTRIBUTING.md`. First-time git setup: `START-HERE.md`.
