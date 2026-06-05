@@ -3,13 +3,18 @@
 Deduped source list behind the course data and the model's parameters — ready to format into the paper's reference section. (`data-sources.md` has the same links with more context.)
 
 ## Courses, routes, and race results
-- **2021 Tokyo Olympic ITT** — men's results & route. Wikipedia: https://en.wikipedia.org/wiki/Cycling_at_the_2020_Summer_Olympics_–_Men's_road_time_trial
-- **2021 Tokyo Olympic ITT** — women's results & route. Wikipedia: https://en.wikipedia.org/wiki/Cycling_at_the_2020_Summer_Olympics_–_Women's_road_time_trial
-- Tokyo ITT course preview / climb gradients. Cyclingnews: https://www.cyclingnews.com/races/olympic-games-2021/men-s-individual-time-trial/preview/ and https://www.cyclingnews.com/races/olympic-games-2021/women-s-individual-time-trial/preview/
-- Tokyo ITT distance & elevation. cyclingstage: https://www.cyclingstage.com/summer-olympics-2021/route-itt-tokyo-2021/
-- **2021 UCI Worlds ITT (Flanders)** — men's & women's results. Wikipedia: https://en.wikipedia.org/wiki/2021_UCI_Road_World_Championships_–_Men's_time_trial and https://en.wikipedia.org/wiki/2021_UCI_Road_World_Championships_–_Women's_time_trial
-- Flanders ITT route. cyclingstage: https://www.cyclingstage.com/world-championships-2021-flanders/route-itt-wc-2021/
-- Flanders ITT official course + elevation profile. UCI Technical Guide (PDF): https://downloads.ctfassets.net/761l7gh5x5an/lYf25TYStUnbzj6vRXM7f/00f43906c8264b99813bed9102d8bc45/guide-tech-cdmr-flandres-2021-eng-web-md.pdf
+
+**2021 Tokyo Olympic ITT** — Fuji Speedway (men 44.2 km / 2 laps, women 22.1 km / 1 lap)
+- Best elevation breakdown (real elevations + segment distances): NBC Olympics course page: https://www.nbcolympics.com/news/cycling-101-courses → per lap: descent to 455 m, main climb 5.4 km to 676 m (**≈4.1% avg**), descent, 2.0 km climb to pit lane (**≈6.8%**), final 2.1 km climb to finish.
+- In-circuit ramp: VeloViewer "Fuji Speedway Climb", 0.86 km / 53 m / **4.4%**: https://veloviewer.com/segments/16466365
+- Route narrative: UCI https://www.uci.org/article/olympic-gold-awaits-at-the-foot-of-mount-fuji/55jtcCLEgwlDZr0WXhDvcv ; cyclingstage https://www.cyclingstage.com/summer-olympics-2021/route-itt-tokyo-2021/
+- Results (official host, JS-rendered — cross-check vs Wikipedia/UCI): olympics.com men https://www.olympics.com/en/olympic-games/tokyo-2020/results/cycling-road/men-s-individual-time-trial , women https://www.olympics.com/en/olympic-games/tokyo-2020/results/cycling-road/women-s-individual-time-trial . Roglič 55:04.19; van Vleuten 30:13.49.
+- *Caveat:* the "8.9% / 5.9% / 4% / 11%" pitch figures are Cyclingnews **preview prose**, not an official profile; "11%" is unverified, and there is **no public official Tokyo-TT technical guide or GPX**. Men's gain is quoted as both 846 m and ~900 m (±50 m). Do **not** reuse the VeloViewer/PJAMM "Fuji" climbs — those are the road race, not the TT.
+
+**2021 UCI Worlds ITT** — Knokke-Heist → Bruges (men 43.3 km, women 30.3 km)
+- Official course + elevation: UCI Technical Guide (PDF, open): https://downloads.ctfassets.net/761l7gh5x5an/lYf25TYStUnbzj6vRXM7f/00f43906c8264b99813bed9102d8bc45/guide-tech-cdmr-flandres-2021-eng-web-md.pdf — pan-flat (~78 m men / ~54 m women). Official GPX via flanders2021.com / Knokke-Heist Strava: https://www.flanders2021.com/en/ride-knokke-heist-brugge
+- Route description: cyclingstage https://www.cyclingstage.com/world-championships-2021-flanders/route-itt-wc-2021/
+- Results: Cyclingnews men https://www.cyclingnews.com/races/uci-road-world-championships-2021/men-elite-individual-time-trial/results/ , women https://www.cyclingnews.com/races/uci-road-world-championships-2021/women-elite-individual-time-trial/results/ . Ganna 47:47; van Dijk ~36:05.
 
 ## Rider physiology and physics
 
