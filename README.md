@@ -15,8 +15,7 @@ UCLA Math 142 group project for 2022 MCM Problem A (power profile of a cyclist):
 | `docs/problem.md` | Problem statement (2022 MCM A) and requirements checklist. |
 | `docs/assignment/` | Official assignment instructions. |
 | `docs/proof-of-work/` | Handwritten derivations, scratch work, meeting notes. |
-| `archive/` | Earlier prototypes (v1, v2) and the retired CP/W′ model. |
-| `paper/` | LaTeX write-up scaffold (currently encodes the retired model — see `paper/README.md`). |
+| `archive/` | Earlier prototypes (v1, v2), the retired CP/W′ model, and the archived LaTeX scaffold. |
 
 ## Model
 
@@ -102,7 +101,7 @@ Riders load the same way as courses — one row per profile in `data/rider_profi
 - [ ] M142 structure (`docs/paper-outline.md`), not the contest's 25-page format
 - [ ] *(Optional, contest-only)* two-page Directeur Sportif race guidance — likely not required for M142; confirm with the professor
 
-The model (`notebooks/model_v3.ipynb`) and the three course files exist. Earlier figures/tables in `paper/` came from the retired CP/W′ model and do not carry over. The model currently predicts times well above the real results in `data/real_results.csv` — a parameter-calibration item, not a structural one.
+The model (`notebooks/model_v3.ipynb`) and the three course files exist. The write-up is a shared document following `docs/paper-outline.md`; the old LaTeX scaffold has been archived under `archive/latex_scaffold/`. The model currently predicts times well above the real results in `data/real_results.csv` — a parameter-calibration item, not a structural one.
 
 ## Running the model
 

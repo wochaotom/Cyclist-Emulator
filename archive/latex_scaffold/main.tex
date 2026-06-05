@@ -1,0 +1,160 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\title{Power Profile of a Cyclist:\\ Pacing and Performance over Time-Trial Courses}
+\author{Carter Dandridge \and Ben Miller \and Dennis Lee \and Prannay Veerabahu}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% ====================================================================
+% NOTE: Archived LaTeX scaffold, updated to describe the CANONICAL
+% time-stepping model (notebooks/model_v3.ipynb). The team's actual
+% write-up is a shared document following docs/paper-outline.md; this
+% file is kept only as a structural reference and is not maintained.
+% ====================================================================
+
+\section*{Summary}
+% TODO (write yourselves, last): a standalone one-page overview.
+
+\section{Introduction}
+
+\subsection{Background}
+% TODO (write yourselves): individual time trials, and why pacing, rider type, and terrain matter.
+
+\subsection{Problem restatement}
+% TODO (write yourselves): given a rider's power limits, how should power be distributed over a fixed course to minimise time, under accumulating fatigue?
+
+\subsection{Variables and notation}
+\begin{center}
+\begin{tabular}{cl}
+\toprule
+Symbol & Meaning \\
+\midrule
+$v$ & speed (m/s) \\
+$w$ & effective headwind on a segment (m/s) \\
+$d_i$ & length of segment $i$ (m) \\
+$\theta$ & slope angle, $\arctan(\mathrm{grade}\%/100)$ (rad) \\
+$\tau_i$ & turn penalty on segment $i$ (s) \\
+$\Delta t$ & time step ($1$ s) \\
+$\rho$ & air density (kg/m$^3$) \\
+$C_dA$ & drag area (m$^2$) \\
+$C_{rr}$ & rolling-resistance coefficient \\
+$m$ & rider $+$ bike mass (kg) \\
+$g$ & gravitational acceleration (m/s$^2$) \\
+$P_\mathrm{out}$ & power actually applied (W) \\
+$P_\mathrm{base}$ & flat-ground target power (W) \\
+$P_\mathrm{thr}$ & power threshold above which fatigue builds (W) \\
+$P_\mathrm{max}$ & short-duration maximal power ceiling (W) \\
+$k_\mathrm{hill}$ & gradient-to-power sensitivity (W/rad) \\
+$f$ & fatigue state, $0 \le f \le 1$ \\
+$r_\mathrm{fat},\, r_\mathrm{rec}$ & fatigue build / recovery rates \\
+$c_\mathrm{fat}$ & fatigue reduction of max power \\
+$v_\mathrm{max}$ & descent speed cap (m/s) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Assumptions}
+% TODO (write yourselves): JUSTIFY each one -- the rubric grades the justification, not the list.
+\begin{enumerate}
+  \item The rider and bike are a single point mass.
+  \item The course is a sequence of segments, each with constant gradient and wind exposure and a fixed turn penalty.
+  \item Motion is integrated in discrete one-second steps (forward Euler); forces are held constant within a step.
+  \item Target power rises linearly with gradient, $P_\mathrm{base} + k_\mathrm{hill}\theta$ (floored at $50$ W): the rider pushes harder uphill and eases downhill.
+  \item Fatigue accumulates when output exceeds $P_\mathrm{thr}$ (growing with the squared relative overshoot) and recovers below it, stays in $[0,1]$, and scales down the available maximum power.
+  \item Wind enters as an effective scalar headwind per segment, set by the segment's exposure label.
+  \item Turns cost a fixed time penalty, not an explicit deceleration.
+  \item Descent speed is capped at $v_\mathrm{max}$.
+\end{enumerate}
+
+\subsection{Modelling approach}
+% TODO (write yourselves): why a time-stepping force balance with a gradient-driven power target and a threshold-fatigue mechanic is reasonable for this problem.
+
+\section{The model}
+
+The rider and bike are treated as one mass advanced in one-second steps. On a segment of slope angle $\theta = \arctan(\mathrm{grade}\%/100)$ the resisting forces are aerodynamic drag, rolling resistance, and gravity:
+\begin{equation}
+F_\mathrm{drag} = \tfrac12 \rho\, C_dA\, (v + w)^2, \qquad
+F_\mathrm{roll} = C_{rr}\, m\, g \cos\theta, \qquad
+F_\mathrm{grav} = m\, g \sin\theta .
+\end{equation}
+The rider applies power $P_\mathrm{out}$, giving propulsive force $F_\mathrm{rider} = P_\mathrm{out} / \max(v, 0.5)$ (the floor prevents division by zero at the start). Target power rises with gradient and is capped by a fatigue-reduced ceiling:
+\begin{equation}
+P_\mathrm{target} = \max\!\big(50,\ P_\mathrm{base} + k_\mathrm{hill}\theta\big), \qquad
+P_\mathrm{out} = \min\!\big(P_\mathrm{target},\ P_\mathrm{max}(1 - c_\mathrm{fat} f)\big).
+\end{equation}
+Fatigue builds above the threshold and recovers below it, bounded to $[0,1]$:
+\begin{equation}
+\Delta f =
+\begin{cases}
++\, r_\mathrm{fat}\left(\dfrac{P_\mathrm{out} - P_\mathrm{thr}}{P_\mathrm{thr}}\right)^2 \Delta t, & P_\mathrm{out} > P_\mathrm{thr}, \\[2mm]
+-\, r_\mathrm{rec}\, \Delta t, & \text{otherwise.}
+\end{cases}
+\end{equation}
+The net force advances speed and position, with speed clamped to $[0, v_\mathrm{max}]$:
+\begin{equation}
+F_\mathrm{net} = F_\mathrm{rider} - F_\mathrm{drag} - F_\mathrm{roll} - F_\mathrm{grav}, \qquad
+v \leftarrow \mathrm{clamp}\!\Big(v + \tfrac{\Delta t}{m} F_\mathrm{net},\ 0,\ v_\mathrm{max}\Big), \qquad
+x \leftarrow x + v\, \Delta t .
+\end{equation}
+Each segment adds its turn penalty $\tau_i$ to the clock; the finishing time is the accumulated $t$ once the full course distance is covered.
+
+\subsection{Riders and courses}
+A rider is defined by $(m, C_dA, P_\mathrm{base}, P_\mathrm{thr}, P_\mathrm{max})$; the profiles are in \texttt{data/rider\_profiles.csv}. The shared constants $C_{rr}$, $v_\mathrm{max}$, $k_\mathrm{hill}$, $r_\mathrm{fat}$, $r_\mathrm{rec}$, $c_\mathrm{fat}$ are common to all riders. A course is an ordered list of segments (distance, gradient, turn penalty, wind exposure) in \texttt{data/courses/}.
+
+\section{Results}
+
+Table~\ref{tab:matrix} gives the finishing time for each rider profile on each course (Tokyo is one $22.1$ km lap; the men ride two laps in the real event).
+% TODO (write yourselves): interpret the matrix -- TT specialists vs climbers, the effect of terrain (flat Flanders vs rolling Tokyo), and gender.
+
+\begin{table}[h]\centering
+\caption{Finishing time (minutes) by rider profile and course, canonical model.}
+\label{tab:matrix}
+\begin{tabular}{lrrr}
+\toprule
+Rider & Tokyo (1 lap) & Flanders & Custom \\
+\midrule
+baseline        & 38.7 & 70.2 & 8.8 \\
+male\_tt         & 31.0 & 56.5 & 7.1 \\
+female\_tt       & 34.9 & 63.2 & 8.0 \\
+male\_climber    & 33.5 & 62.5 & 7.8 \\
+female\_climber  & 37.2 & 69.0 & 8.6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Still to run on the canonical model.}
+% TODO (run on the notebook, then tabulate):
+\begin{itemize}
+  \item Wind sensitivity: vary the per-segment effective headwind (or apply a uniform offset) and report the change in finishing and split times.
+  \item Power-deviation sensitivity: scale the target power by $(1 \pm \text{dev})$ and report the resulting range of split times.
+  \item Validation: compare model finishing times against \texttt{data/real\_results.csv} (the men ride two Tokyo laps). The baseline rider currently runs well over the real times, so calibrate the power parameters.
+\end{itemize}
+
+\section{Model assessment}
+% TODO (write yourselves): strengths and weaknesses against the problem goals; where the model is likely to fail; how it could be tested, calibrated, or improved.
+
+\paragraph{Known limitations and possible refinements.}
+\begin{itemize}
+  \item Pacing is reactive: target power is a fixed function of gradient, not the time-optimal power profile under the fatigue budget.
+  \item The tuning constants ($k_\mathrm{hill}$, $r_\mathrm{fat}$, $r_\mathrm{rec}$, $c_\mathrm{fat}$) are hand-calibrated, not externally sourced.
+  \item Wind is treated as a scalar headwind per segment, not a direction-dependent vector.
+  \item With the baseline parameters the model predicts times above the real results -- a calibration issue addressed by the literature-based rider profiles.
+  \item Alternative modelling choice (required by the rubric): the critical-power (CP/$W'$) model in \texttt{archive/cp\_w\_prime\_model/}, a different fatigue framework that spends a finite anaerobic reserve $W'$ above a critical power.
+\end{itemize}
+
+\section{Conclusion}
+% TODO (write yourselves): summarise the findings and give future directions.
+
+\section*{References}
+% TODO: format properly. Full list with URLs is in references/references.md and
+% references/data-sources.md (course geometry, 2021 ITT results, rider power /
+% CdA / Crr / air-density ranges).
+
+\end{document}

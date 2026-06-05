@@ -1,6 +1,6 @@
 # Paper outline — write-up skeleton
 
-> **The paper itself lives in Overleaf:** <!-- paste the Overleaf link here -->
+> **The paper itself lives in the team's shared write-up document:** <!-- paste the doc link here -->
 >
 > This file is only a structural checklist mirroring the M142 rubric. Each bracketed note states what belongs in that section.
 
