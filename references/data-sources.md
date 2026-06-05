@@ -25,11 +25,11 @@ Machine-readable in [`../data/real_results.csv`](../data/real_results.csv).
 
 ## Course geometry and gradients
 
-- **Tokyo (Fuji Speedway lap):** per-segment climb gradients — main climb 8.9% → 5.9% → 4% → 11% pitch, second climb to 8.9% — from the Cyclingnews ITT previews ([women's](https://www.cyclingnews.com/races/olympic-games-2021/women-s-individual-time-trial/preview/), [men's](https://www.cyclingnews.com/races/olympic-games-2021/men-s-individual-time-trial/preview/)). Men repeat the women's 22.1 km lap. Segment lengths and descent gradients in `tokyo_olympic_tt.csv` are *inferred* to match the published 22.1 km / ~423 m per lap.
+- **Tokyo (Fuji Speedway lap):** gradients in `tokyo_olympic_tt.csv` are derived from the [NBC Olympics elevation breakdown](https://www.nbcolympics.com/news/cycling-101-courses) (real elevations at stated distances: 591 → 455 → 676 → 590 → 591 m), giving ~390 m of climbing per lap. No official numeric profile is published; the earlier Cyclingnews preview pitches (8.9%/11%) were prose and are not used. Men repeat the women's 22.1 km lap. In-circuit ramp cross-check: [VeloViewer Fuji Speedway segment](https://veloviewer.com/segments/16466365) (0.86 km / 4.4%).
 - **Flanders:** pan-flat (78 m men / 54 m women, no published climbs). Official km-marked profile in the [UCI Flanders 2021 Technical Guide PDF](https://downloads.ctfassets.net/761l7gh5x5an/lYf25TYStUnbzj6vRXM7f/00f43906c8264b99813bed9102d8bc45/guide-tech-cdmr-flandres-2021-eng-web-md.pdf) (pp. 36–37 men, 42–43 women).
 - **Ready-made GPX** (browser export, no login, not scriptable): La Flamme Rouge [Flanders ME ITT](https://www.la-flamme-rouge.eu/maps/viewtrack/414042).
 
 ## Not yet verified — confirm before relying on
-- Tokyo per-climb gradients (only aggregate ~19 m/km known; per-climb % not published).
+- Tokyo has no official numeric profile; gradients come from the NBC elevation breakdown. Modeled gain (~390 m/lap) is below the ~423 m/lap implied by the quoted 846 m / 2 laps — a ±40 m gap from undulations the simplified profile omits.
 - Worlds elevation (single-sourced: men ~78 m, women ~54 m).
 - Elite-female measured CP / W′ and CdA (scaled estimates, not lab data).

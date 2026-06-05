@@ -43,10 +43,10 @@ The three courses the problem requires:
 | File | Course | Distance | Climbing | Status |
 |------|--------|---------:|---------:|--------|
 | `custom_5km_loop.csv` | Self-designed technical loop (4 sharp turns) | 5.0 km | one 6% ramp | Ready |
-| `tokyo_olympic_tt.csv` | Tokyo 2021 Olympic ITT (1 lap; men ride 2) | 22.1 km | ~423 m | Gradients sourced, lengths inferred |
+| `tokyo_olympic_tt.csv` | Tokyo 2021 Olympic ITT (1 lap; men ride 2) | 22.1 km | ~390 m | Gradients from NBC profile |
 | `flanders_world_tt.csv` | Flanders 2021 Worlds ITT (men) | 43.3 km | ~78 m (flat) | Confirmed flat |
 
-Tokyo's climb gradients are quoted from race previews; its segment lengths/descents and the wind labels are estimates — provenance in [`data/courses/README.md`](data/courses/README.md) and [`references/data-sources.md`](references/data-sources.md).
+Tokyo's gradients are derived from the NBC Olympics elevation breakdown; the wind labels are modeling estimates — provenance in [`data/courses/README.md`](data/courses/README.md) and [`references/data-sources.md`](references/data-sources.md).
 
 ## Status — what's left
 
