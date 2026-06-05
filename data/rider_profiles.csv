@@ -1,0 +1,6 @@
+profile_id,gender,rider_type,mass_kg,cda_m2,p_base_w,p_threshold_w,p_max_w
+baseline,unspecified,generic,75,0.26,250,300,400
+male_tt,M,time_trial,80,0.21,370,400,600
+male_climber,M,climber,70,0.25,325,350,525
+female_tt,F,time_trial,70,0.20,260,280,420
+female_climber,F,climber,62,0.23,230,250,375
