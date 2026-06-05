@@ -67,7 +67,7 @@ Total 43.3 km; essentially flat.
 
 ## Sourcing summary
 
-- **Distances and gradients** come from route data: Tokyo from the Cyclingnews race preview, Flanders from the UCI technical guide (full URLs in `references/references.md`).
-- **Tokyo's segment lengths and descents** are estimated to match the published 22.1 km / ~423 m totals, since no usable official elevation profile was found.
+- **Distances and gradients** come from route data: Tokyo from the NBC Olympics elevation breakdown, Flanders from the UCI technical guide (full URLs in `references/references.md`).
+- **Tokyo's profile** is anchored to NBC's real elevations (591 → 455 → 676 → 590 → 591 m), giving ~390 m of climbing per lap; no official numeric profile is published.
 - **Turn penalties and wind-exposure labels** are modeling choices the team assigned, not measured data.
 - **The custom course** is entirely self-designed.
