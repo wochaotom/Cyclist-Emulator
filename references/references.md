@@ -40,6 +40,10 @@ Deduped source list behind the course data and the model's parameters — ready 
 - BestBikeSplit: https://www.bestbikesplit.com/blog/rolling-resistance-cycling-triathlon
 - → ≈ 0.003 (pristine surface / fastest tire) to 0.004 (on-road).
 
+**Air density (ρ)**
+- International Standard Atmosphere — dry air, 15 °C at sea level: 1.225 kg/m³.
+- → treated as constant per course; a few percent lower at Fuji's ~600 m, assumed negligible.
+
 **Max descent speed (V_max)**
 - BikeRadar, 2019 Tour de France telemetry — Politt 101.5 km/h, first over 100 km/h on the official feed: https://www.bikeradar.com/features/tour-de-france-2019-in-numbers
 - → defensible ceiling ≈ 100–110 km/h. (130 km/h figures are uncorrected Strava — do not use as a default.)
