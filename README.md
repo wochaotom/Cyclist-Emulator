@@ -12,7 +12,6 @@ UCLA Math 142 group project for 2022 MCM Problem A (power profile of a cyclist):
 | `data/rider_profiles.csv` | Rider parameter sets (one row per profile) — the rider profiles. |
 | `references/data-sources.md` | Sources for course geometry, race results, and physical/physiological parameters. |
 | `references/references.md` | Deduplicated citation list. |
-| `docs/problem.md` | Problem statement (2022 MCM A) and requirements checklist. |
 | `docs/assignment/` | Official assignment instructions. |
 | `docs/proof-of-work/` | Handwritten derivations, scratch work, meeting notes. |
 | `archive/` | Earlier prototypes (v1, v2), the retired CP/W′ model, and the archived LaTeX scaffold. |
@@ -78,7 +77,7 @@ Riders load the same way as courses — one row per profile in `data/rider_profi
 
 ## Requirements & status
 
-2022 MCM Problem A. Detailed statement: `docs/problem.md` and `references/2022_PowerOfCyclist.pdf`.
+2022 MCM Problem A. Full statement: `references/2022_PowerOfCyclist.pdf`.
 
 **Riders** — *profiles built (`data/rider_profiles.csv`); comparison results not yet written up*
 - [x] Two rider types — time-trial specialist and climber
