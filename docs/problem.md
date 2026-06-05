@@ -6,6 +6,8 @@ Our project answers **2022 MCM Problem A — "Power Profile of a Cyclist."** Ful
 
 ## Requirements checklist
 
+*Live progress is tracked in the main [README](../README.md#requirements--status); the list below is the detailed source.*
+
 **Riders**
 - [ ] Power profiles for **two rider types** — one a **time-trial specialist**, the other a different type (climber, sprinter, rouleur, or puncheur).
 - [ ] Consider **different genders**.

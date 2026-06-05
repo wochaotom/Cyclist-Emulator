@@ -19,9 +19,27 @@ UCLA Math 142 group project for 2022 MCM Problem A (power profile of a cyclist):
 
 ## Model
 
-`notebooks/model_v3.ipynb`. The rider and bike are treated as one mass. Each time step sets a target power from the segment gradient, caps it at a fatigue-reduced ceiling, subtracts aerodynamic drag, gravity, and rolling resistance to get net force, and integrates speed and distance forward (Euler, 1-second steps). Fatigue accumulates while power is above a threshold and recovers below it. Parameter values and the derivation are in the team write-up.
+`notebooks/model_v3.ipynb`. The rider and bike are treated as one point mass, pushed forward by the rider against air, road, and gravity, and stepped forward in time.
 
-`archive/cp_w_prime_model/` holds an earlier critical-power (CP/W′) model, kept as the alternative modeling choice discussed in the paper.
+On a segment of slope angle $\theta = \arctan(\text{grade}\%/100)$, the resisting forces are aerodynamic drag, rolling resistance, and gravity:
+
+$$F_\text{drag} = \tfrac{1}{2}\,\rho\,C_dA\,(v+w)^2, \quad F_\text{roll} = C_{rr}\,m\,g\cos\theta, \quad F_\text{grav} = m\,g\sin\theta$$
+
+where $v$ is speed and $w$ the effective headwind from the segment's wind label. The rider's propulsive force is power divided by speed, $F_\text{rider} = P_\text{out}/\max(v,\,0.5)$ (the floor avoids dividing by zero at the start). Net force is integrated forward with a one-second step:
+
+$$F_\text{net} = F_\text{rider} - F_\text{drag} - F_\text{roll} - F_\text{grav}, \qquad v \leftarrow \mathrm{clamp}\!\left(v + \tfrac{\Delta t}{m}F_\text{net},\ 0,\ v_\text{max}\right), \qquad x \leftarrow x + v\,\Delta t$$
+
+Target power rises with gradient (harder uphill, easier down) and is capped by a fatigue-reduced ceiling:
+
+$$P_\text{target} = \max(50,\ P_\text{base} + k_\text{hill}\,\theta), \qquad P_\text{out} = \min\!\big(P_\text{target},\ P_\text{max}(1 - c_\text{fat}\cdot\text{fat})\big)$$
+
+Fatigue grows when output exceeds a threshold and recovers below it (clamped to $[0,1]$):
+
+$$\Delta\text{fat} = \begin{cases} +\,r_\text{fat}\left(\dfrac{P_\text{out}-P_\text{thr}}{P_\text{thr}}\right)^2 \Delta t & P_\text{out} > P_\text{thr} \\[2mm] -\,r_\text{rec}\,\Delta t & \text{otherwise} \end{cases}$$
+
+Each segment also adds its `turn_penalty_s` to the clock for cornering. Symbols map to code as $\rho$ = `a_density`, $C_dA$ = `CdA`, $C_{rr}$ = `Crr`, $k_\text{hill}$ = `hill_factor`, $P_\text{thr}$ = `P_threshold`, $c_\text{fat}$ = `fatigue_impact`, $r_\text{fat}$ = `fatigue_rate`, $r_\text{rec}$ = `recovery_rate`. Parameter values and their justification are in the team write-up.
+
+`archive/cp_w_prime_model/` holds an earlier critical-power (CP/W′) model — a different fatigue framework, kept as the alternative modeling choice discussed in the paper.
 
 ## Courses
 
@@ -44,9 +62,31 @@ A course is an ordered list of segments in a CSV under `data/courses/`. Columns:
 
 Distance and gradient are sourced; turn penalty and wind label are modeling assignments. Per-field provenance is in `data/courses/README.md` and `references/data-sources.md`.
 
-## Status
+## Requirements & status
 
-The model and the three course files are in place. Remaining work: run the model on the three courses, run the wind and power-deviation sensitivity analyses and the rider-type comparison, and write the results, model assessment, and conclusion into the paper. Result tables and figures still in `paper/` came from the retired CP/W′ model and do not carry over.
+2022 MCM Problem A. Detailed statement: `docs/problem.md` and `references/2022_PowerOfCyclist.pdf`.
+
+**Riders**
+- [ ] Two rider types — a time-trial specialist and one other (climber / sprinter / rouleur / puncheur)
+- [ ] Both genders
+
+**Courses** — *course files parameterized; model results not yet produced*
+- [x] Tokyo 2021 Olympic ITT — `data/courses/tokyo_olympic_tt.csv`
+- [x] Flanders 2021 Worlds ITT — `data/courses/flanders_world_tt.csv`
+- [x] Self-designed course (≥4 sharp turns, ≥1 grade, finish near start) — `data/courses/custom_5km_loop.csv`
+
+**Analysis**
+- [ ] Power distribution vs. position that minimizes time
+- [ ] Weather (wind) sensitivity
+- [ ] Power-deviation sensitivity (missed target power → split-time range)
+
+**Extension**
+- [ ] Team time trial of six riders (team time set by the fourth finisher) — discussion only
+
+**Write-up**
+- [ ] M142 structure (`docs/paper-outline.md`), not the contest's 25-page format
+
+The model (`notebooks/model_v3.ipynb`) and the three course files exist. Earlier figures/tables in `paper/` came from the retired CP/W′ model and do not carry over. The model currently predicts times well above the real results in `data/real_results.csv` — a parameter-calibration item, not a structural one.
 
 ## Running the model
 
