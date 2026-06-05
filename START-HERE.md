@@ -35,6 +35,6 @@ That's it: **Fetch → work → Commit → Push.** Commit and push often — any
 - `data/courses/` — the course files
 - `docs/` — the assignment, problem, and proof-of-work (derivation photos, meeting notes)
 - `references/` — sources
-- `notebooks/archive/` and `archive/` — earlier prototypes and the retired CP/W′ model
+- `archive/` — earlier prototypes (v1, v2) and the retired CP/W′ model
 
 Stuck? Ask in the group chat — someone's probably hit the same thing.

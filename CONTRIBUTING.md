@@ -42,7 +42,7 @@ pip install numpy matplotlib jupyter
 
 The model is the notebook [`notebooks/model_v3.ipynb`](notebooks/model_v3.ipynb). Notebooks store JSON with their outputs, so they merge badly — **one person owns the notebook at a time**; say so in the group chat before you edit it.
 
-The prototypes in [`notebooks/archive/`](notebooks/archive/) and the retired CP/W′ model in [`archive/`](archive/) are kept as proof of work — don't edit them.
+The prototypes and the retired CP/W′ model in [`archive/`](archive/) are kept as proof of work — don't edit them.
 
 ## Proof of work
 

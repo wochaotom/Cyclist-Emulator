@@ -13,13 +13,12 @@ Group modeling project for **UCLA Math 142**, answering **2022 MCM Problem A** (
 | Path | What's in it |
 |------|--------------|
 | [`notebooks/model_v3.ipynb`](notebooks/model_v3.ipynb) | **The model** — dynamic time-stepping + fatigue. |
-| [`notebooks/archive/`](notebooks/archive/) | Earlier prototypes (v1, v2) — proof of work. |
 | [`data/courses/`](data/courses/) | Course files (CSV of segments) — the course parameters. |
 | [`references/data-sources.md`](references/data-sources.md) | Sources for course data, real results, and physical/physiological values. |
 | [`docs/assignment/`](docs/assignment/) | The official assignment instructions. |
 | [`docs/problem.md`](docs/problem.md) | The problem (2022 MCM A) and a requirements checklist. |
 | [`docs/proof-of-work/`](docs/proof-of-work/) | Handwritten derivations, scratch work, meeting notes — bring to consultations. |
-| [`archive/cp_w_prime_model/`](archive/cp_w_prime_model/) | An earlier critical-power (CP/W′) model — retired, kept as the paper's "alternative modeling choice." |
+| [`archive/`](archive/) | Earlier prototypes (v1, v2) and the retired CP/W′ model (`cp_w_prime_model/`) — proof of work; the CP/W′ model is the paper's "alternative modeling choice." |
 | [`paper/`](paper/) | LaTeX scaffold (its results came from the retired model — see the note there). |
 
 ## The model
