@@ -57,7 +57,7 @@ A course is an ordered list of segments in a CSV under `data/courses/`. Columns:
 | File | Course | Distance | Climbing | Gradient source |
 |------|--------|---------:|---------:|-----------------|
 | `custom_5km_loop.csv` | Self-designed technical loop (4 sharp turns) | 5.0 km | one 6% ramp | self-designed |
-| `tokyo_olympic_tt.csv` | Tokyo 2021 Olympic ITT (1 lap; men ride 2) | 22.1 km | ~390 m | NBC elevation breakdown |
+| `tokyo_olympic_tt.csv` | Tokyo 2021 Olympic ITT (1 lap; men ride 2) | 22.1 km | ~310 m | 26-seg reconstruction, scaled to 22.1 km |
 | `flanders_world_tt.csv` | Flanders 2021 Worlds ITT (men) | 43.3 km | ~78 m (flat) | UCI technical guide |
 
 Distance and gradient are sourced; turn penalty and wind label are modeling assignments. Per-field provenance is in `data/courses/README.md` and `references/data-sources.md`.

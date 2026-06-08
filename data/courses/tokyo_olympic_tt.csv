@@ -1,7 +1,27 @@
 segment_id,name,distance_m,grade_pct,turn_penalty_s,wind_exposure
-1,Speedway start and exit descent,4900,-2.8,6,low
-2,Main climb to high point,5400,4.1,0,medium
-3,Descent from high point,5200,-4.3,4,medium
-4,Climb to pit lane,2000,6.8,3,low
-5,Slight descent before finish,2500,-1.4,2,low
-6,Final climb to finish,2100,1.7,0,low
+1,Speedway start straight,1679,0.0,0,low
+2,Speedway initial descent,703,-1.5,0,low
+3,Speedway exit descent (steep),681,-3.5,2,low
+4,Track exit descent upper,1361,-3.2,2,low
+5,Track exit descent lower,1134,-2.8,2,low
+6,Flat valley bottom / road junction,567,0.2,5,low
+7,Lower slopes of main climb,1134,2.5,0,medium
+8,Main climb lower-mid,1134,3.1,0,medium
+9,Middle of main climb (steepest),1021,5.8,0,medium
+10,Upper main climb,1021,4.9,0,high
+11,Main climb final steep pitch,454,8.9,0,high
+12,Summit plateau / time check,340,1.0,0,high
+13,Descent from summit (fast upper),1134,-5.1,0,high
+14,Descent mid section,1134,-4.6,0,medium
+15,Sweeping bends lower descent,908,-4.6,3,medium
+16,Lower descent toward Speedway,908,-2.8,2,low
+17,Final flat approach to Speedway,454,-1.5,0,low
+18,Flat approach to Speedway entrance,681,0.4,6,low
+19,Pit lane climb (lower ramp),454,4.2,0,low
+20,Pit lane climb (steep upper),340,8.9,0,low
+21,Pit lane climb (upper ramp),454,6.1,3,low
+22,Speedway infield rolling section,908,1.2,0,low
+23,Back straight (flat sheltered),1134,0.0,0,low
+24,Final bend onto main straight,454,0.3,4,low
+25,Main straight to finish,1679,-0.5,0,low
+26,Finish line buffer,229,0.0,0,low
