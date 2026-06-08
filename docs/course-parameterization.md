@@ -34,19 +34,39 @@ So **distance and gradient are sourced; the turn penalty and wind label are mode
 
 Total 5.0 km; four sharp turns (#2, #4, #6, #8); one 6% ramp.
 
-### 2. Tokyo — 2021 Olympic ITT (Fuji Speedway lap)
-One 22.1 km lap (the women's course; the men ride two laps = 44.2 km). *Source: segment gradients are derived from the NBC Olympics elevation breakdown (real elevations at stated distances) — the most defensible anchor available, since no official numeric profile is published. The earlier short-pitch figures (8.9% / 11%) were Cyclingnews preview prose and are no longer used.* **[your call]** add the NBC citation, and note that this gives ~390 m of climbing per lap, slightly below the ~423–450 m quoted elsewhere (minor undulations the simplified profile omits).
+### 2. Tokyo - 2021 Olympic ITT (Fuji Speedway lap)
+One 22.1 km lap (the women's course; the men ride two laps = 44.2 km). *Source: a detailed 26-segment reconstruction of the lap from the race course map and elevation profile, with segment distances scaled to the official 22.1 km lap, since no official numeric profile is published. The earlier short-pitch figures (8.9% / 11%) were Cyclingnews preview prose and are no longer used.* **[your call]** note this gives ~310 m of climbing per lap, below the ~423-450 m quoted elsewhere (the simplified profile omits minor undulations); the NBC elevation breakdown and the VeloViewer in-circuit ramp are cross-checks.
 
 | # | Segment | Distance (m) | Grade (%) | Turn (s) | Wind |
 |---|---------|-----:|-----:|-----:|------|
-| 1 | Speedway start and exit descent | 4900 | −2.8 | 6 | low |
-| 2 | Main climb to high point | 5400 | 4.1 | 0 | medium |
-| 3 | Descent from high point | 5200 | −4.3 | 4 | medium |
-| 4 | Climb to pit lane | 2000 | 6.8 | 3 | low |
-| 5 | Slight descent before finish | 2500 | −1.4 | 2 | low |
-| 6 | Final climb to finish | 2100 | 1.7 | 0 | low |
+| 1 | Speedway start straight | 1679 | 0.0 | 0 | low |
+| 2 | Speedway initial descent | 703 | -1.5 | 0 | low |
+| 3 | Speedway exit descent (steep) | 681 | -3.5 | 2 | low |
+| 4 | Track exit descent upper | 1361 | -3.2 | 2 | low |
+| 5 | Track exit descent lower | 1134 | -2.8 | 2 | low |
+| 6 | Flat valley bottom / road junction | 567 | 0.2 | 5 | low |
+| 7 | Lower slopes of main climb | 1134 | 2.5 | 0 | medium |
+| 8 | Main climb lower-mid | 1134 | 3.1 | 0 | medium |
+| 9 | Middle of main climb (steepest) | 1021 | 5.8 | 0 | medium |
+| 10 | Upper main climb | 1021 | 4.9 | 0 | high |
+| 11 | Main climb final steep pitch | 454 | 8.9 | 0 | high |
+| 12 | Summit plateau / time check | 340 | 1.0 | 0 | high |
+| 13 | Descent from summit (fast upper) | 1134 | -5.1 | 0 | high |
+| 14 | Descent mid section | 1134 | -4.6 | 0 | medium |
+| 15 | Sweeping bends lower descent | 908 | -4.6 | 3 | medium |
+| 16 | Lower descent toward Speedway | 908 | -2.8 | 2 | low |
+| 17 | Final flat approach to Speedway | 454 | -1.5 | 0 | low |
+| 18 | Flat approach to Speedway entrance | 681 | 0.4 | 6 | low |
+| 19 | Pit lane climb (lower ramp) | 454 | 4.2 | 0 | low |
+| 20 | Pit lane climb (steep upper) | 340 | 8.9 | 0 | low |
+| 21 | Pit lane climb (upper ramp) | 454 | 6.1 | 3 | low |
+| 22 | Speedway infield rolling section | 908 | 1.2 | 0 | low |
+| 23 | Back straight (flat sheltered) | 1134 | 0.0 | 0 | low |
+| 24 | Final bend onto main straight | 454 | 0.3 | 4 | low |
+| 25 | Main straight to finish | 1679 | -0.5 | 0 | low |
+| 26 | Finish line buffer | 229 | 0.0 | 0 | low |
 
-Total 22.1 km; ~390 m of climbing per lap (anchored to NBC's 591 → 455 → 676 → 590 → 591 m elevations).
+Total 22.1 km; ~310 m of climbing per lap (men ride two laps = 44.2 km).
 
 ### 3. Flanders — 2021 UCI Worlds ITT (Knokke-Heist → Bruges)
 Men's 43.3 km (the women's course is 30.3 km). *Source: the distance and the flat profile (~78 m total) are from the official UCI technical guide; the route order (seafront → inland → canals → Bruges) is from the cyclingstage course description. The course is essentially flat, so gradients are 0 and wind exposure is the dominant variable.*
@@ -67,7 +87,7 @@ Total 43.3 km; essentially flat.
 
 ## Sourcing summary
 
-- **Distances and gradients** come from route data: Tokyo from the NBC Olympics elevation breakdown, Flanders from the UCI technical guide (full URLs in `references/data-sources.md`).
-- **Tokyo's profile** is anchored to NBC's real elevations (591 → 455 → 676 → 590 → 591 m), giving ~390 m of climbing per lap; no official numeric profile is published.
+- **Distances and gradients** come from route data: Tokyo from a race-course-map reconstruction (scaled to 22.1 km), Flanders from the UCI technical guide (full URLs in `references/data-sources.md`).
+- **Tokyo's profile** is anchored to NBC's real elevations (591 → 455 → 676 → 590 → 591 m), giving ~310 m of climbing per lap; no official numeric profile is published.
 - **Turn penalties and wind-exposure labels** are modeling choices the team assigned, not measured data.
 - **The custom course** is entirely self-designed.
