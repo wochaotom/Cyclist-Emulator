@@ -105,7 +105,7 @@ Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_th
 - [x] Self-designed course (≥4 sharp turns, ≥1 grade, finish near start) — `data/courses/custom_5km_loop.csv`
 
 **Analysis**
-- [x] Power distribution vs. position that minimizes time — `scipy` optimizes `hill_factor` + `flat_boost` per rider/course
+- [x] Power distribution vs. position that minimizes time — `scipy` optimizes `hill_factor` + `flat_boost` per rider/course; profiles in `results/power_profiles.csv` and `results/power_*.png`
 - [ ] Weather sensitivity — wind direction and strength
 - [ ] Power-deviation sensitivity (missed target power → range of split times)
 
@@ -116,7 +116,7 @@ Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_th
 - [ ] M142 structure (`docs/paper-outline.md`), not the contest's 25-page format
 - [ ] *(Optional, contest-only)* two-page Directeur Sportif race guidance — likely not required for M142; confirm with the professor
 
-The model (`notebooks/model_v5.ipynb`) and the three course files exist. The write-up is a shared document following `docs/paper-outline.md`; the old LaTeX scaffold has been archived under `archive/latex_scaffold/`. With the elite profiles and optimized pacing the model lands within ~7% of the real winners (e.g. `male_tt` on the 2-lap Tokyo: 58.8 min vs Roglič's 55:04) — the residual gap is parameter calibration, not structure.
+The model (`notebooks/model_v5.ipynb`) and the three course files exist. The write-up is a shared document following `docs/paper-outline.md`; the old LaTeX scaffold has been archived under `archive/latex_scaffold/`. With the elite profiles and optimized pacing the model lands within ~8% of the real winners (e.g. `male_tt` on the 2-lap Tokyo: 59.4 min vs Roglič's 55:04) — the residual gap is parameter calibration, not structure.
 
 ## Running the model
 
