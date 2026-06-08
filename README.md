@@ -105,10 +105,10 @@ Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_th
 - [x] Flanders 2021 Worlds ITT — `data/courses/flanders_world_tt.csv`
 - [x] Self-designed course (≥4 sharp turns, ≥1 grade, finish near start) — `data/courses/custom_5km_loop.csv`
 
-**Analysis**
+**Analysis** — *complete; outputs and a re-runnable audit (`results/verify_results.py`) in `results/`*
 - [x] Power distribution vs. position that minimizes time — `scipy` optimizes `hill_factor` + `flat_boost` per rider/course; per-segment profile in `results/power_by_segment.csv`, plots in `results/power_*.png`
-- [ ] Weather sensitivity — wind direction and strength
-- [ ] Power-deviation sensitivity (missed target power → range of split times)
+- [x] Weather sensitivity — wind **strength** (uniform head/tail offset), `results/wind_sensitivity.*`. Wind *direction* is not modeled (the model uses a scalar headwind) — a stated limitation.
+- [x] Power-deviation sensitivity (±5/10/15% off the planned power → finishing-time spread) — `results/power_deviation.*`
 
 **Extension**
 - [ ] Team time trial of six riders (team time set by the fourth finisher) — discussion only
@@ -117,7 +117,7 @@ Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_th
 - [ ] M142 structure (`docs/paper-outline.md`), not the contest's 25-page format
 - [ ] *(Optional, contest-only)* two-page Directeur Sportif race guidance — likely not required for M142; confirm with the professor
 
-The model (`notebooks/model_v5.ipynb`) and the three course files exist. The write-up is a shared document following `docs/paper-outline.md`; the old LaTeX scaffold has been archived under `archive/latex_scaffold/`. With the elite profiles and optimized pacing the model lands within ~8% of the real winners (e.g. `male_tt` on the 2-lap Tokyo: 59.4 min vs Roglič's 55:04) — the residual gap is parameter calibration, not structure.
+The model (`notebooks/model_v5.ipynb`) and the three course files exist. The write-up is a shared document following `docs/paper-outline.md`; the old LaTeX scaffold has been archived under `archive/latex_scaffold/`. With the elite profiles and optimized pacing the model finishes within ~8-12% of the real winners (`results/validation.*`: `male_tt` 2-lap Tokyo 59.2 min vs Roglič 55:04 = +7.5%, `female_tt` Tokyo +11.6%, `male_tt` Flanders +11.9%) — the residual gap is parameter calibration, not structure.
 
 ## Running the model
 
