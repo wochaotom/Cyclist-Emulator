@@ -92,7 +92,7 @@ for label in labels:
     ax.grid(alpha=0.3)
     ax.legend(fontsize=8)
     fig.tight_layout()
-    fig.savefig(os.path.join("results", "sweep_" + label.lower() + ".png"), dpi=90)
+    fig.savefig(os.path.join("results", "speed_" + label.lower() + ".png"), dpi=90)
 
 # Per-segment optimal power: the average power the rider holds on each stretch of road.
 # A compact, readable table of the P(x) profile (the dense per-second curve is the plots below).
