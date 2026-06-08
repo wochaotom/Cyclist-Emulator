@@ -105,7 +105,7 @@ Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_th
 - [x] Self-designed course (≥4 sharp turns, ≥1 grade, finish near start) — `data/courses/custom_5km_loop.csv`
 
 **Analysis**
-- [x] Power distribution vs. position that minimizes time — `scipy` optimizes `hill_factor` + `flat_boost` per rider/course; profiles in `results/power_profiles.csv` and `results/power_*.png`
+- [x] Power distribution vs. position that minimizes time — `scipy` optimizes `hill_factor` + `flat_boost` per rider/course; per-segment profile in `results/power_by_segment.csv`, plots in `results/power_*.png`
 - [ ] Weather sensitivity — wind direction and strength
 - [ ] Power-deviation sensitivity (missed target power → range of split times)
 

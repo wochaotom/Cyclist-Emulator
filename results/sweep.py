@@ -2,7 +2,7 @@
 
 Reuses the real notebook code (notebooks/model_v5.ipynb) by executing its cells with the
 rider/course/laps swapped in - no duplicated physics. Writes a finishing-time table
-(results/sweep_results.csv), the optimal power-vs-position profiles (results/power_profiles.csv),
+(results/sweep_results.csv), a per-segment optimal-power table (results/power_by_segment.csv),
 and one speed-vs-distance and one power-vs-distance plot per course.
 
 Courses are held at one lap each so the comparison is rider-vs-rider on identical terrain
@@ -45,19 +45,22 @@ def run(rider, course_file):
     best_time = res.fun
     full = sim(tuple(res.x), True)  # t, fat, times, speeds, distances, drags, powers, fatigues, gradients
     distances, speeds, powers = full[4], full[3], full[6]
-    return best_time, res.x, distances, speeds, powers
+    course = ns["course"]  # the 1-lap course (list of segment tuples) for per-segment summaries
+    return best_time, res.x, distances, speeds, powers, course
 
 times = {}   # (rider, course) -> optimal seconds
 params = {}  # (rider, course) -> (hill_factor, flat_boost)
 speed_curves = {label: {} for _, label in courses}
 power_curves = {label: {} for _, label in courses}  # (rider, course) -> (distances_m, powers_w)
+seg_defs = {}  # label -> the course's 1-lap segment list (same for every rider)
 for course_file, label in courses:
     for rider in riders:
-        bt, x, dist, spd, pwr = run(rider, course_file)
+        bt, x, dist, spd, pwr, course_segs = run(rider, course_file)
         times[(rider, label)] = bt
         params[(rider, label)] = x
         speed_curves[label][rider] = ([d / 1000 for d in dist], [s * 3.6 for s in spd])
         power_curves[label][rider] = (dist, pwr)  # raw metres + watts, for the P(x) profile
+        seg_defs[label] = course_segs
 
 labels = [label for _, label in courses]
 print("Optimal finishing time (min) by rider x course (1 lap each):")
@@ -86,16 +89,37 @@ for label in labels:
     fig.tight_layout()
     fig.savefig(os.path.join("results", "sweep_" + label.lower() + ".png"), dpi=90)
 
-# The power-vs-position profile P(x): the optimal power distribution over the course.
-# This is the analysis the problem asks for - power distributed by position to minimise time.
-with open(os.path.join("results", "power_profiles.csv"), "w", newline="") as f:
+# Per-segment optimal power: the average power the rider holds on each stretch of road.
+# A compact, readable table of the P(x) profile (the dense per-second curve is the plots below).
+def segment_average_power(distances_m, powers_w, segments):
+    """Bin the per-second power into course segments and return the mean power per segment."""
+    bounds = []  # cumulative end-distance of each segment
+    cum = 0.0
+    for _name, d, _gr, _turn, _wind in segments:
+        cum += d
+        bounds.append(cum)
+    sums = [0.0] * len(segments)
+    counts = [0] * len(segments)
+    si = 0
+    for dd, pp in zip(distances_m, powers_w):
+        while si < len(bounds) - 1 and dd > bounds[si]:  # advance to the segment this step falls in
+            si += 1
+        sums[si] += pp
+        counts[si] += 1
+    return [(sums[i] / counts[i]) if counts[i] else 0.0 for i in range(len(segments))]
+
+with open(os.path.join("results", "power_by_segment.csv"), "w", newline="") as f:
     w = csv.writer(f)
-    w.writerow(["rider", "course", "distance_m", "power_w"])
+    w.writerow(["rider", "course", "segment", "name", "start_km", "length_m", "grade_pct", "avg_power_w"])
     for label in labels:
+        segments = seg_defs[label]
         for rider in riders:
             dist, pwr = power_curves[label][rider]
-            for d, p in zip(dist[::5], pwr[::5]):  # every 5 s - keeps the file lean; the plots below use full resolution
-                w.writerow([rider, label, round(d), round(p)])
+            avgs = segment_average_power(dist, pwr, segments)
+            start = 0.0
+            for i, (name, d, gr, turn, wind) in enumerate(segments):
+                w.writerow([rider, label, i + 1, name, round(start / 1000, 2), round(d), gr, round(avgs[i])])
+                start += d
 
 for label in labels:
     fig, ax = plt.subplots(figsize=(9, 4))
@@ -110,4 +134,4 @@ for label in labels:
     fig.tight_layout()
     fig.savefig(os.path.join("results", "power_" + label.lower() + ".png"), dpi=90)
 
-print("wrote results/sweep_results.csv, results/power_profiles.csv, and 6 plots")
+print("wrote results/sweep_results.csv, results/power_by_segment.csv, and 6 plots")
