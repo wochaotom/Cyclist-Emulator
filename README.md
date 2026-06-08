@@ -6,7 +6,7 @@ UCLA Math 142 group project for 2022 MCM Problem A (power profile of a cyclist):
 
 | Path | Contents |
 |------|----------|
-| `notebooks/model_v3.ipynb` | The model: time-stepping simulation with power-threshold fatigue. |
+| `notebooks/model_v5.ipynb` | The model: time-stepping simulation + power-threshold fatigue, with scipy-optimized pacing. |
 | `data/courses/` | Course files (CSV, one row per segment) — the course parameters. |
 | `data/real_results.csv` | 2021 ITT finishing times used as validation targets. |
 | `data/rider_profiles.csv` | Rider parameter sets (one row per profile) |
@@ -17,7 +17,7 @@ UCLA Math 142 group project for 2022 MCM Problem A (power profile of a cyclist):
 
 ## Model
 
-`notebooks/model_v3.ipynb`. The rider and bike are treated as one point mass, pushed forward by the rider against air, road, and gravity, and stepped forward in time.
+`notebooks/model_v5.ipynb`. The rider and bike are treated as one point mass, pushed forward by the rider against air, road, and gravity, and stepped forward in time.
 
 On a segment of slope angle $\theta = \arctan(\text{grade}\%/100)$, the resisting forces are aerodynamic drag, rolling resistance, and gravity:
 
@@ -36,6 +36,8 @@ Fatigue grows when output exceeds a threshold and recovers below it (clamped to 
 $$\Delta\text{fat} = r_\text{fat}\left(\frac{P_\text{out}-P_\text{thr}}{P_\text{thr}}\right)^2 \Delta t \quad \text{if } P_\text{out} > P_\text{thr}, \qquad \Delta\text{fat} = -r_\text{rec}\,\Delta t \quad \text{otherwise}$$
 
 Each segment also adds its `turn_penalty_s` to the clock for cornering. Symbols map to code as $\rho$ = `a_density`, $C_dA$ = `CdA`, $C_{rr}$ = `Crr`, $k_\text{hill}$ = `hill_factor`, $P_\text{thr}$ = `P_threshold`, $c_\text{fat}$ = `fatigue_impact`, $r_\text{fat}$ = `fatigue_rate`, $r_\text{rec}$ = `recovery_rate`. Parameter values and their justification are in the team write-up.
+
+Pacing is set by two knobs — `hill_factor` (extra power per unit gradient) and `flat_boost` (power held above `P_base` on flats and descents) — and `scipy.optimize.minimize` searches them for the time-minimizing strategy for each rider on each course. Tokyo is one lap; set `laps = 2` for the men's race.
 
 `archive/cp_w_prime_model/` holds an earlier critical-power (CP/W′) model — a different fatigue framework, kept as the alternative modeling choice discussed in the paper.
 
@@ -103,7 +105,7 @@ Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_th
 - [x] Self-designed course (≥4 sharp turns, ≥1 grade, finish near start) — `data/courses/custom_5km_loop.csv`
 
 **Analysis**
-- [ ] Power distribution vs. position that minimizes time (within the energy/fatigue limits)
+- [x] Power distribution vs. position that minimizes time — `scipy` optimizes `hill_factor` + `flat_boost` per rider/course
 - [ ] Weather sensitivity — wind direction and strength
 - [ ] Power-deviation sensitivity (missed target power → range of split times)
 
@@ -114,7 +116,7 @@ Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_th
 - [ ] M142 structure (`docs/paper-outline.md`), not the contest's 25-page format
 - [ ] *(Optional, contest-only)* two-page Directeur Sportif race guidance — likely not required for M142; confirm with the professor
 
-The model (`notebooks/model_v3.ipynb`) and the three course files exist. The write-up is a shared document following `docs/paper-outline.md`; the old LaTeX scaffold has been archived under `archive/latex_scaffold/`. The model currently predicts times well above the real results in `data/real_results.csv` — a parameter-calibration item, not a structural one.
+The model (`notebooks/model_v5.ipynb`) and the three course files exist. The write-up is a shared document following `docs/paper-outline.md`; the old LaTeX scaffold has been archived under `archive/latex_scaffold/`. With the elite profiles and optimized pacing the model lands within ~7% of the real winners (e.g. `male_tt` on the 2-lap Tokyo: 58.8 min vs Roglič's 55:04) — the residual gap is parameter calibration, not structure.
 
 ## Running the model
 
@@ -122,7 +124,7 @@ The model (`notebooks/model_v3.ipynb`) and the three course files exist. The wri
 git clone https://github.com/wochaotom/Cyclist-Emulator.git
 cd Cyclist-Emulator
 pip install numpy matplotlib jupyter
-jupyter notebook notebooks/model_v3.ipynb
+jupyter notebook notebooks/model_v5.ipynb
 ```
 
 Then Run All. Two one-line switches choose what gets simulated:

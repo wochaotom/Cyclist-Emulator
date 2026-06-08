@@ -18,7 +18,7 @@ Machine-readable in [`../data/real_results.csv`](../data/real_results.csv).
 
 ## Rider and physics parameters (estimates / population ranges)
 
-These map to the **canonical model's** inputs ([`../notebooks/model_v3.ipynb`](../notebooks/model_v3.ipynb)).
+These map to the **canonical model's** inputs ([`../notebooks/model_v5.ipynb`](../notebooks/model_v5.ipynb)).
 
 - **Sustainable / threshold power** (the model's `P_base` / `P_threshold`): elite men ≈ 5.5 W/kg for 60 min (~360–400 W at typical TT mass); elite women ≈ 4.2 W/kg (~260–290 W). Measured critical power for elite men ≈ 324–365 W. [Valenzuela 2022, PMID 35193109](https://pubmed.ncbi.nlm.nih.gov/35193109/) (men, n=144 pros); [Mateo-March 2022, PMID 35168197](https://pubmed.ncbi.nlm.nih.gov/35168197/) (women, n=44 pros); [Clark & MacDermid 2021, PMC8562202](https://pmc.ncbi.nlm.nih.gov/articles/PMC8562202/).
 - **Peak / ceiling power** (the model's `P_max`): world-class FTP ≈ 6.4 (men) / 5.7 (women) W/kg; 5-s peak ≈ 24 / 19 W/kg. [Coggan & Allen power-profile chart](https://www.cyclinganalytics.com/blog/2018/06/how-does-your-cycling-power-output-compare).

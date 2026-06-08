@@ -1,12 +1,10 @@
 # References
 
-Source materials for the project. Add full citations here as you cite them in the paper.
+What's in this folder:
 
-| File | What it is | Notes |
-|------|-----------|-------|
-| `2022_PowerOfCyclist.pdf` | Background paper on cyclist power. | |
+| File | What it is |
+|------|-----------|
+| `data-sources.md` | **The sources file** — every sourced value and citation behind the model, courses, and validation (course geometry, real race results, rider/physics parameters), with the "dropped after verification" audit. |
+| `2022_PowerOfCyclist.pdf` | The official problem statement (2022 MCM Problem A). |
 
-## Citations (fill in as you use them)
-
-- [ ] _Author, Title, Year, source._ — used for: …
-- [ ] …
+All citations live in `data-sources.md` — cite from there when writing the paper.
