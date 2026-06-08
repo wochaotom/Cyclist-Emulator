@@ -111,7 +111,7 @@ Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_th
 - [x] Power-deviation sensitivity (±5/10/15% off the planned power → finishing-time spread) — `results/power_deviation.*`
 
 **Extension**
-- [ ] Team time trial of six riders (team time set by the fourth finisher) — discussion only
+- [x] Team time trial of six riders (team time set by the fourth finisher) — discussion only (in the write-up)
 
 **Write-up**
 - [ ] M142 structure (`docs/paper-outline.md`), not the contest's 25-page format
