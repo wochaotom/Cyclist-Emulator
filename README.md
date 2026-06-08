@@ -11,6 +11,7 @@ UCLA Math 142 group project for 2022 MCM Problem A (power profile of a cyclist):
 | `data/real_results.csv` | 2021 ITT finishing times used as validation targets. |
 | `data/rider_profiles.csv` | Rider parameter sets (one row per profile) |
 | `references/data-sources.md` | All sourced values and citations — course geometry, race results, physical/physiological parameters. |
+| `results/` | Optimization sweep outputs — finishing-time table, per-segment power, and comparison plots. |
 | `docs/assignment/` | Official assignment instructions. |
 | `docs/proof-of-work/` | Handwritten derivations, scratch work, meeting notes. |
 | `archive/` | Earlier prototypes (v1, v2), the retired CP/W′ model, and the archived LaTeX scaffold. |
@@ -95,11 +96,11 @@ Sources: Wikipedia — Tokyo [men's](https://en.wikipedia.org/wiki/Cycling_at_th
 
 2022 MCM Problem A. Full statement: `references/2022_PowerOfCyclist.pdf`.
 
-**Riders** — *profiles built (`data/rider_profiles.csv`); comparison results not yet written up*
+**Riders** — *profiles built (`data/rider_profiles.csv`); comparison results in `results/`, paper write-up pending*
 - [x] Two rider types — time-trial specialist and climber
 - [x] Both genders (male + female of each type)
 
-**Courses** — *course files parameterized; model results not yet produced*
+**Courses** — *course files parameterized; model results in `results/`*
 - [x] Tokyo 2021 Olympic ITT — `data/courses/tokyo_olympic_tt.csv`
 - [x] Flanders 2021 Worlds ITT — `data/courses/flanders_world_tt.csv`
 - [x] Self-designed course (≥4 sharp turns, ≥1 grade, finish near start) — `data/courses/custom_5km_loop.csv`

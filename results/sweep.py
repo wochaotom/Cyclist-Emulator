@@ -3,7 +3,8 @@
 Reuses the real notebook code (notebooks/model_v5.ipynb) by executing its cells with the
 rider/course/laps swapped in - no duplicated physics. Writes a finishing-time table
 (results/sweep_results.csv), a per-segment optimal-power table (results/power_by_segment.csv),
-and one speed-vs-distance and one power-vs-distance plot per course.
+a speed-vs-distance and a power-over-terrain plot per course, and a finishing-time bar chart
+(results/finish_times.png).
 
 Courses are held at one lap each so the comparison is rider-vs-rider on identical terrain
 (the real men's Tokyo is two laps - that 2-lap validation is in model_v5 itself).
@@ -28,6 +29,8 @@ riders = ["baseline", "male_tt", "female_tt", "male_climber", "female_climber"]
 courses = [("tokyo_olympic_tt.csv", "Tokyo"),
            ("flanders_world_tt.csv", "Flanders"),
            ("custom_5km_loop.csv", "Custom")]
+rider_colors = {"baseline": "#7f7f7f", "male_tt": "#1f77b4", "female_tt": "#d62728",
+                "male_climber": "#2ca02c", "female_climber": "#9467bd"}  # one colour per rider, used in every figure
 
 def run(rider, course_file):
     """Execute the notebook's setup cells for one rider/course, then optimise the pacing."""
@@ -80,7 +83,7 @@ for label in labels:
     fig, ax = plt.subplots(figsize=(9, 4))
     for rider in riders:
         dk, sk = speed_curves[label][rider]
-        ax.plot(dk, sk, label=rider, alpha=0.85)
+        ax.plot(dk, sk, label=rider, color=rider_colors[rider], alpha=0.85)
     ax.set_title("Optimal speed vs distance - " + label + " (1 lap)")
     ax.set_xlabel("Distance (km)")
     ax.set_ylabel("Speed (km/h)")
@@ -122,16 +125,49 @@ with open(os.path.join("results", "power_by_segment.csv"), "w", newline="") as f
                 start += d
 
 for label in labels:
+    segments = seg_defs[label]
+    # gradient profile as a step series (km, grade %) to shade behind the power curves
+    gd = []; gg = []
+    cum = 0.0
+    for name, d, gr, turn, wind in segments:
+        gd.append(cum / 1000); gg.append(gr)
+        cum += d
+        gd.append(cum / 1000); gg.append(gr)
     fig, ax = plt.subplots(figsize=(9, 4))
+    ax2 = ax.twinx()  # terrain on its own axis, drawn behind the power lines
+    ax2.fill_between(gd, gg, 0, color="0.85", zorder=0)
+    ax2.set_ylabel("Gradient (%)")
+    ax2.set_ylim(min(min(gg), -1), max(max(gg), 1) * 1.5)
     for rider in riders:
         dist, pwr = power_curves[label][rider]
-        ax.plot([d / 1000 for d in dist], pwr, label=rider, alpha=0.85)
-    ax.set_title("Optimal power vs distance - " + label + " (1 lap)")
+        ax.plot([d / 1000 for d in dist], pwr, label=rider, color=rider_colors[rider], alpha=0.9, zorder=3)
+    ax.set_zorder(ax2.get_zorder() + 1)  # bring the power lines in front of the terrain shading
+    ax.patch.set_visible(False)          # but let the shading show through the (now transparent) power axes
+    ax.set_title("Optimal power over terrain - " + label + " (1 lap)")
     ax.set_xlabel("Distance (km)")
     ax.set_ylabel("Power (W)")
     ax.grid(alpha=0.3)
-    ax.legend(fontsize=8)
+    ax.legend(fontsize=8, loc="upper right")
     fig.tight_layout()
     fig.savefig(os.path.join("results", "power_" + label.lower() + ".png"), dpi=90)
 
-print("wrote results/sweep_results.csv, results/power_by_segment.csv, and 6 plots")
+# Finishing-time comparison: grouped bars, one group per course, one bar per rider.
+fig, ax = plt.subplots(figsize=(10, 5))
+bar_w = 0.8 / len(riders)
+for ri, rider in enumerate(riders):
+    xs = [ci + (ri - (len(riders) - 1) / 2) * bar_w for ci in range(len(labels))]
+    ys = [times[(rider, label)] / 60 for label in labels]
+    ax.bar(xs, ys, width=bar_w, label=rider, color=rider_colors[rider])
+    for x, y in zip(xs, ys):  # value label above each bar, rotated to fit
+        ax.text(x, y + 0.4, str(round(y, 1)), ha="center", va="bottom", fontsize=7, rotation=90)
+ax.set_xticks(range(len(labels)))
+ax.set_xticklabels(labels)
+ax.set_ylabel("Finishing time (min)")
+ax.set_ylim(0, max(times.values()) / 60 * 1.15)
+ax.set_title("Optimal finishing time by rider and course (1 lap each)")
+ax.grid(axis="y", alpha=0.3)
+ax.legend(fontsize=8, ncol=len(riders), loc="upper center", bbox_to_anchor=(0.5, -0.08))
+fig.tight_layout()
+fig.savefig(os.path.join("results", "finish_times.png"), dpi=90)
+
+print("wrote results/sweep_results.csv, results/power_by_segment.csv, and 7 plots")
