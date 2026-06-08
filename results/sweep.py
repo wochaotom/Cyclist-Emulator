@@ -33,6 +33,7 @@ courses = [("tokyo_olympic_tt.csv", "Tokyo"),
            ("custom_5km_loop.csv", "Custom")]
 rider_colors = {"male_tt": "#1f77b4", "female_tt": "#d62728",
                 "male_climber": "#2ca02c", "female_climber": "#9467bd"}  # one colour per rider, used in every figure
+OPT_STARTS = [[800, 50], [200, 10], [1500, 120], [1000, 80], [400, 30]]  # several starts - single-start under-converges on short/hilly courses
 
 def run(rider, course_file):
     """Execute the notebook's setup cells for one rider/course, then optimise the pacing."""
@@ -46,7 +47,8 @@ def run(rider, course_file):
             s = s.replace("laps = 2", "laps = 1")  # one lap per course for an apples-to-apples comparison
         exec(compile(s, "cell" + str(i), "exec"), ns)
     sim = ns["simulate"]  # the real simulate() from the notebook
-    res = minimize(sim, x0=[800, 50], method="Nelder-Mead", bounds=[(0, 2000), (0, 150)])
+    res = min((minimize(sim, x0=s0, method="Nelder-Mead", bounds=[(0, 2000), (0, 150)]) for s0 in OPT_STARTS),
+              key=lambda r: r.fun)  # best of several starts
     best_time = res.fun
     full = sim(tuple(res.x), True)  # t, fat, times, speeds, distances, drags, powers, fatigues, gradients
     distances, speeds, powers = full[4], full[3], full[6]

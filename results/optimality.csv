@@ -1,0 +1,13 @@
+rider,course,committed_min,best_multistart_min,improvement_min
+male_tt,Tokyo,29.6,29.58,0.02
+female_tt,Tokyo,33.7,33.73,-0.03
+male_climber,Tokyo,32.2,32.25,-0.05
+female_climber,Tokyo,36.0,36.03,-0.03
+male_tt,Flanders,53.5,53.47,0.03
+female_tt,Flanders,59.9,59.88,0.02
+male_climber,Flanders,59.3,59.33,-0.03
+female_climber,Flanders,65.2,65.25,-0.05
+male_tt,Custom,6.5,6.48,0.02
+female_tt,Custom,7.3,7.33,-0.03
+male_climber,Custom,7.1,7.12,-0.02
+female_climber,Custom,7.9,7.88,0.02

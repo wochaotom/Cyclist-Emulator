@@ -1,0 +1,4 @@
+race,rider,real_winner,distance_km,model_min,real_min,error_pct
+Tokyo men (2 laps),male_tt,Primoz Roglic,44.2,59.22,55.07,7.5
+Tokyo women (1 lap),female_tt,Annemiek van Vleuten,22.1,33.73,30.22,11.6
+Flanders men,male_tt,Filippo Ganna,43.3,53.47,47.8,11.9

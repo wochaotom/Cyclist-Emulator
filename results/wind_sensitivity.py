@@ -34,6 +34,7 @@ COURSES = [("tokyo_olympic_tt.csv", "Tokyo"),
            ("custom_5km_loop.csv", "Custom")]
 OFFSETS = [-4, -3, -2, -1, 0, 1, 2, 3, 4]  # m/s added to every segment's headwind (negative = tailwind)
 COURSE_COLORS = {"Tokyo": "#1f77b4", "Flanders": "#d62728", "Custom": "#2ca02c"}
+OPT_STARTS = [[800, 50], [200, 10], [1500, 120], [1000, 80], [400, 30]]  # multi-start optimiser (matches sweep.py)
 
 def build(course_file):
     """Exec the model's setup cells for male_tt on one course at one lap; return the namespace."""
@@ -56,8 +57,9 @@ def time_at(course_file, pacing, wind_offset):
 
 results = {label: {} for _, label in COURSES}
 for course_file, label in COURSES:
-    res = minimize(build(course_file)["simulate"], x0=[800, 50],
-                   method="Nelder-Mead", bounds=[(0, 2000), (0, 150)])
+    sim = build(course_file)["simulate"]
+    res = min((minimize(sim, x0=s0, method="Nelder-Mead", bounds=[(0, 2000), (0, 150)]) for s0 in OPT_STARTS),
+              key=lambda r: r.fun)
     pacing = tuple(res.x)  # calm-optimal pacing, held fixed across all wind offsets
     for w in OFFSETS:
         results[label][w] = time_at(course_file, pacing, w)

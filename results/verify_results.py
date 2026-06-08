@@ -33,6 +33,7 @@ def read_csv(path):
 nb = json.load(open(os.path.join(REPO, "notebooks", "model_v5.ipynb"), encoding="utf-8-sig"))
 cells = ["".join(c["source"]) for c in nb["cells"] if c["cell_type"] == "code"]
 from scipy.optimize import minimize
+OPT_STARTS = [[800, 50], [200, 10], [1500, 120], [1000, 80], [400, 30]]  # multi-start optimiser (matches sweep.py)
 
 def build_sim(rider, course_file):
     """Exec the model's setup cells for one rider/course at one lap; return its namespace."""
@@ -67,7 +68,8 @@ try:  # C2 reproducibility - re-optimise all 12 and compare finishing times
     for cf, label in COURSES:
         for rider in RIDERS:
             ns = build_sim(rider, cf)
-            res = minimize(ns["simulate"], x0=[800, 50], method="Nelder-Mead", bounds=[(0, 2000), (0, 150)])
+            res = min((minimize(ns["simulate"], x0=s0, method="Nelder-Mead", bounds=[(0, 2000), (0, 150)]) for s0 in OPT_STARTS),
+                      key=lambda r: r.fun)
             got = round(res.fun / 60, 1)
             want = float(sweep[rider][label + "_min"])
             if abs(got - want) > 0.2:
@@ -76,17 +78,19 @@ try:  # C2 reproducibility - re-optimise all 12 and compare finishing times
 except Exception as e:
     check("C2 reproducibility", False, repr(e))
 
-try:  # C3 internal consistency - first (flat) segment power == P_base + flat_boost
+try:  # C3 consistency - on flat segments the held power never exceeds P_base + flat_boost
+    # (it equals it when uncapped, but fatigue can cap aggressive pacing lower - so check the ceiling)
     bad = []
     for cf, label in COURSES:
         for rider in RIDERS:
-            first = next(r for r in seg_rows if r["rider"] == rider and r["course"] == label
-                         and int(r["segment"]) == 1)
-            expected = float(profiles[rider]["p_base_w"]) + float(sweep[rider][label + "_flat_boost"])
-            got = float(first["avg_power_w"])
-            if abs(got - expected) > 3:
-                bad.append(rider + "/" + label + " expected=" + str(round(expected)) + " got=" + str(round(got)))
-    check("C3 flat-segment power == P_base + flat_boost", not bad, "; ".join(bad))
+            ceiling = float(profiles[rider]["p_base_w"]) + float(sweep[rider][label + "_flat_boost"])
+            flats = [r for r in seg_rows if r["rider"] == rider and r["course"] == label
+                     and abs(float(r["grade_pct"])) < 0.05]
+            over = [r for r in flats if float(r["avg_power_w"]) > ceiling + 1]
+            if over:
+                bad.append(rider + "/" + label + " seg " + over[0]["segment"]
+                           + " power " + over[0]["avg_power_w"] + " > ceiling " + str(round(ceiling)))
+    check("C3 flat-segment power <= P_base + flat_boost (fatigue may cap it lower)", not bad, "; ".join(bad))
 except Exception as e:
     check("C3 internal consistency", False, repr(e))
 
@@ -192,6 +196,17 @@ check("S2 wind sensitivity present (csv >= 9 rows + plot)",
 check("S3 power-deviation sensitivity present (csv >= 7 rows + plot)",
       exists("power_deviation.csv") and rowcount("power_deviation.csv") >= 7 and exists("power_deviation.png"))
 check("S4 results documented (results/README.md present)", exists("README.md"))
+check("S5 validation present (model vs real winners)",
+      exists("validation.csv") and exists("validation.png"))
+try:  # V1 the model lands within 15% of every real winner it is compared to
+    if os.path.isfile(os.path.join(RESULTS, "validation.csv")):
+        vrows = read_csv(os.path.join(RESULTS, "validation.csv"))
+        bad = [r["race"] + " " + r["error_pct"] + "%" for r in vrows if abs(float(r["error_pct"])) > 15]
+        check("V1 model within 15% of real winners", not bad, "; ".join(bad))
+    else:
+        check("V1 model within 15% of real winners", False, "validation.csv absent")
+except Exception as e:
+    check("V1 validation band", False, repr(e))
 
 # ================= Report =================
 fails = sum(1 for _, p, _ in checks if not p)
