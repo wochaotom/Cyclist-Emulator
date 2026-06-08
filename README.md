@@ -65,7 +65,7 @@ Distance and gradient are sourced; turn penalty and wind label are modeling assi
 
 ## Rider profiles
 
-Riders load the same way as courses — one row per profile in `data/rider_profiles.csv`, selected by `rider = "..."` in the notebook's Rider Parameters cell. `baseline` reproduces the originally submitted rider; the typed profiles are derived from the sourced ranges (power from W/kg figures × an assumed body mass, CdA by rider type; female values scaled and flagged — see `data/README.md`).
+Riders load the same way as courses — one row per profile in `data/rider_profiles.csv`, selected by `rider = "..."` in the notebook's Rider Parameters cell. `baseline` reproduces the originally submitted rider and is kept only as a calibration reference (the results comparison uses the four typed riders); the typed profiles are derived from the sourced ranges (power from W/kg figures × an assumed body mass, CdA by rider type; female values scaled and flagged — see `data/README.md`).
 
 | profile_id | gender | type | mass (kg) | CdA (m²) | P_base (W) | P_threshold (W) | P_max (W) |
 |------------|--------|------|----------:|---------:|-----------:|----------------:|----------:|
