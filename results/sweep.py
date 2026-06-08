@@ -25,11 +25,13 @@ nb = json.load(open(os.path.join("notebooks", "model_v5.ipynb"), encoding="utf-8
 cells = ["".join(c["source"]) for c in nb["cells"] if c["cell_type"] == "code"]
 # cells: 0 imports, 1 world constants, 2 rider, 3 course, 4 simulate, 5 optimiser, 6 plots
 
-riders = ["baseline", "male_tt", "female_tt", "male_climber", "female_climber"]
+# the four required riders - two types (TT specialist, climber) x two genders.
+# `baseline` (the original generic rider) stays in rider_profiles.csv as a calibration reference, but is left out of the comparison.
+riders = ["male_tt", "female_tt", "male_climber", "female_climber"]
 courses = [("tokyo_olympic_tt.csv", "Tokyo"),
            ("flanders_world_tt.csv", "Flanders"),
            ("custom_5km_loop.csv", "Custom")]
-rider_colors = {"baseline": "#7f7f7f", "male_tt": "#1f77b4", "female_tt": "#d62728",
+rider_colors = {"male_tt": "#1f77b4", "female_tt": "#d62728",
                 "male_climber": "#2ca02c", "female_climber": "#9467bd"}  # one colour per rider, used in every figure
 
 def run(rider, course_file):
